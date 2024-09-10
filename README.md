@@ -4,4 +4,4 @@
 * Andrew Huang
 * Dima Lim
 * Aivi Tran Fortier
-* Cyrus YonG
+* Cyrus Yong
