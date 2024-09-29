@@ -1,4 +1,4 @@
-# Meeting Agenda
+# Meeting Agenda (Sep 25)
 1. Discuss which metatable to use for our project and research question
 
 # Meeting Notes
