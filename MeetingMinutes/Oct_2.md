@@ -5,4 +5,10 @@
 4. Talk about the next steps
 
 # Meeting Notes
-*
+* Question: how many samples should we aim for if SRMS = 68 samples, PRMS = 71 samples, total RRMS = 470 if we want to look at them separately? . Answer: Do analysis on all 600 (non-duplicate) samples and then subset 70 samples for each
+* Duplicate samples in the data set are taken at different time points.
+
+# To do
+* Identify confounding variables and what variables to control for (probiotics)
+* Trim down the number of samples
+* Create metadata manifest file
