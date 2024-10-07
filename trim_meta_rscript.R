@@ -30,4 +30,13 @@ PPMS_filtered <- filter(filter_meta, disease_course=="PPMS")
 
 filter_meta %>% group_by(disease_course) %>% summarise(n = n())
 
+# Changing the column names in manifest_untrimmed to match meta
+
+colnames(manifest_untrimmed)  <- c("sample-id","absolute-filepath")
+
+# Combining both data frames together with left join to filter out deleted rows in meta, then separating the data frames again
+
+combined <- left_join(meta, manifest_untrimmed)
+manifest <- combined[c('sample-id', 'absolute-filepath')]
+
 write.csv(filter_meta, "meta_ms", row.names = FALSE)
