@@ -17,3 +17,5 @@ filter_meta <- filter(meta, probiotics == 0) %>%
   group_by(`household`) %>% # samples are paired by household, one MS and one control
   filter(n() == 2) %>% # filters out any rows that do not contain two rows per household
   ungroup()
+
+write.csv(filter_meta, "meta_ms", row.names = FALSE)
