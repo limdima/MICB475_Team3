@@ -28,4 +28,6 @@ SPMS_filtered <- filter(filter_meta, disease_course=="SPMS")
 RRMS_filtered <- filter(filter_meta, disease_course=="RRMS")
 PPMS_filtered <- filter(filter_meta, disease_course=="PPMS")
 
+filter_meta %>% group_by(disease_course) %>% summarise(n = n())
+
 write.csv(filter_meta, "meta_ms", row.names = FALSE)
