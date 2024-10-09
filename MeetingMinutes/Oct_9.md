@@ -16,6 +16,7 @@
 * literature review to determine what variables to explore
 * determine who is doing what task and what tasks would be beneficial to go over as a group
 * must complete: title, hypothesis, research objectives, experimental aims and rationale (or at least the main bullet points for each section)
+* Hypothesis: Is secondary and primary MS more closely related in terms of gut microbiome and functionality compared to RRMS
 
 # Task delegation
 1. Proposed title: Everyone
@@ -29,4 +30,3 @@
 9. Participation report: not priority
 10. References: not priority
 
-Hypothesis: Is secondary and primary MS more closely related in terms of gut microbiome and functionality compared to RRMS
