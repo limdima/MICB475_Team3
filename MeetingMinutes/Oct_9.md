@@ -17,3 +17,16 @@
 * determine who is doing what task and what tasks would be beneficial to go over as a group
 * must complete: title, hypothesis, research objectives, experimental aims and rationale (or at least the main bullet points for each section)
 
+# Task delegation
+1. Proposed title: Everyone
+2. Introduction and background: Everyone
+3. Research Objectives: Everyone
+4. Experimental aims and rationale: Everyone
+5. Proposed approach: Andrew, Cyrus, and Natalia
+6. Overview flowchart: Everyone (not priority)
+7. Weekly timeframe: Not a priority
+8. Dataset Overview: Dima and Aivi
+9. Participation report: not priority
+10. References: not priority
+
+Hypothesis: Is secondary and primary MS more closely related in terms of gut microbiome and functionality compared to RRMS
