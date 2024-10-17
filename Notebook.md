@@ -73,4 +73,4 @@ qiime feature-classifier classify-sklearn \
   --i-reads ms-rep-seqs.qza \
   --o-classification ms-taxonomy.qza
 
-## Next Steps: Taxonomy analysis
+## Next Steps: Taxonomic analysis
