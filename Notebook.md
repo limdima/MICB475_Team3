@@ -27,7 +27,7 @@ qiime dada2 denoise-single \
   --i-demultiplexed-seqs ms_demux_seqs.qza \
   --p-trim-left 0 \
   --p-trunc-len 151 \
-  --o-representative-sequences rep-seqs.qza \
+  --o-representative-sequences ms-rep-seqs.qza \
   --o-table ms-table.qza \
   --o-denoising-stats ms-stats.qza
 
@@ -59,7 +59,7 @@ qiime feature-classifier extract-reads \
   --p-trunc-len 151 \
   --o-reads ms-ref-seqs-trimmed.qza
 
-#Training classifier with your new ref-seq file
+#(done)Training classifier with your new ref-seq file
 
 qiime feature-classifier fit-classifier-naive-bayes \
   --i-reference-reads ms-ref-seqs-trimmed.qza \
