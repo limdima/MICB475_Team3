@@ -16,9 +16,10 @@ qiime feature-table summarize \
   --m-sample-metadata-file /mnt/datasets/project_2/MS/corrected_ms_metadata.tsv
 
 ## Frequency-based filtering (ASV's with <0.005% of total reads are filtered out as they may be sequencing errors rather than true biological variants)
+#Total reads from ms-table-no-mitochondria-no-chloroplast.qzv is 14,002,658
 qiime feature-table filter-features \
 --i-table ms-table-no-mitochondria-no-chloroplast.qza \
---p-min-frequency ___ \
+--p-min-frequency 700 \
 --o-filtered-table ms-mit-chlor-freq-filtered-table.qza
 
 
@@ -39,11 +40,11 @@ qiime phylogeny align-to-tree-mafft-fasttree \
   --o-tree ms-unrooted-tree.qza \
   --o-rooted-tree ms-rooted-tree.qza 
 
-## Alpha-rarefaction
+## Alpha-rarefaction; the sampling depth was set to 9459 to retain at least 40 samples for each MS subgroup (55.70% of features retained)
 qiime diversity alpha-rarefaction \
   --i-table ms-mit-chlor-freq-filtered-table.qza \
   --i-phylogeny ms-rooted-tree.qza \
-  --p-max-depth ____ \
+  --p-max-depth 9459 \
   --m-metadata-file /mnt/datasets/project_2/MS/corrected_ms_metadata.tsv \
   --o-visualization ms-alpha-rarefaction.qzv
 
