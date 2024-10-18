@@ -40,7 +40,7 @@ qiime phylogeny align-to-tree-mafft-fasttree \
   --o-tree ms-unrooted-tree.qza \
   --o-rooted-tree ms-rooted-tree.qza 
 
-## Alpha-rarefaction; the sampling depth was set to 9459 to retain at least 40 samples for each MS subgroup (55.70% of features retained)
+## Alpha-rarefaction; the sampling depth was set to 9488 to retain at least 40 samples for each MS subgroup (55.73% of features retained)
 qiime diversity alpha-rarefaction \
   --i-table ms-mit-chlor-freq-filtered-table.qza \
   --i-phylogeny ms-rooted-tree.qza \
