@@ -44,7 +44,7 @@ qiime phylogeny align-to-tree-mafft-fasttree \
 qiime diversity alpha-rarefaction \
   --i-table ms-mit-chlor-freq-filtered-table.qza \
   --i-phylogeny ms-rooted-tree.qza \
-  --p-max-depth 9459 \
+  --p-max-depth 30000 \
   --m-metadata-file /mnt/datasets/project_2/MS/corrected_ms_metadata.tsv \
   --o-visualization ms-alpha-rarefaction.qzv
 
