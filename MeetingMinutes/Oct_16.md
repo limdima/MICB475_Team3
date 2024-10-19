@@ -16,5 +16,5 @@
   e) We can include a fourth aim, if we see any differences between disease progression - if these findings are applicable to other datasets.
   f) We can consider weighted and unweighted UNIFRAC for analysis. Unweighted is quick to do and can give some good information.
 2. It is important to explain that the reason we want to investigate the difference between PPMS and SPMS is because the authors of the original study combined them together but did not really explain why. However, they are significantly different symptom-wise.
-3. Keep in mind the limitations of a functional analysis: it is a prediction, we do not describe the actual function of a community. Our resolution (16S) means that much of our taxonomic information stops at the genus level but within a genus species can be very different.
+3. Keep in mind the limitations of a functional analysis: it is a prediction, so everything discovered performed with picrust2 is only the potential of microbes, not what is specifically happening in the microbiome. We do not describe the actual function of a community. Our resolution (16S) is not very high, meaning that much of our taxonomic information stops at the genus level but within a genus species can be very different (even if we get to the species level bacteria can vary greatly).
    a) Be careful in this section of using "strong" sentences.
