@@ -112,3 +112,26 @@ qiime feature-classifier classify-sklearn \
   --o-classification ms-taxonomy.qza
 
 ## Next Steps: Taxonomic analysis
+
+# October 26, 2024 Export Feature Table, Taxonomy and Phylogeny Files
+## Generate export files in export directory
+qiime tools export \
+  --input-path ../project2/ms-table.qza \
+  --output-path ms-table_export
+
+biom convert \
+-i feature-table.biom \
+--to-tsv \
+-o ms-table.txt
+
+qiime tools export \
+  --input-path ../project2/ms-taxonomy.qza \
+  --output-path taxonomy_export 
+
+qiime tools export \
+  --input-path ../project2/ms-rooted-tree.qza \
+  --output-path ms-rooted-tree_export 
+
+# Transfer export directory to local computer
+scp -r root@10.19.139.182:/home/qiime2/data/project2/ms_export .
+
