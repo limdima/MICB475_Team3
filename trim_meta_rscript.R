@@ -39,4 +39,4 @@ colnames(manifest_untrimmed)  <- c("sample-id","absolute-filepath")
 combined <- left_join(meta, manifest_untrimmed)
 manifest <- combined[c('sample-id', 'absolute-filepath')]
 
-write.csv(filter_meta, "meta_ms", row.names = FALSE)
+write.csv(filter_meta, "meta_ms.csv", row.names = FALSE)
