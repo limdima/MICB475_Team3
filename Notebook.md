@@ -93,7 +93,7 @@ qiime feature-table filter-features \
 --p-min-frequency 700 \
 --o-filtered-table ms-mit-chlor-freq-filtered-table.qza
 
-### ms-mit-chlor-freq-filtered-table.qza has 915 samples
+### ms-mit-chlor-freq-filtered-table.qza has 915 samples after filtering, 869 total features
 
 ## Visualize mitochondria, chloroplast, and frequency-based filtered ASVs stats
 qiime feature-table summarize \
