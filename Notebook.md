@@ -148,7 +148,7 @@ scp -r root@10.19.139.182:/home/qiime2/data/project2/ms_export .
 
 qiime tools export \
   --input-path ../project2/ms-mit-chlor-freq-filtered-table.qza \
-  --output-path ms-table_export
+  --output-path ms_export
 
 biom convert \
 -i feature-table.biom \
