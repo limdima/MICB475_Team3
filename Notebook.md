@@ -9,11 +9,15 @@ qiime taxa filter-table \
   --p-exclude mitochondria,chloroplast \
   --o-filtered-table ms-table-no-mitochondria-no-chloroplast.qza
 
+#  ms-table-no-mitochondria-no-chloroplast.qza has 921 samples
+
 ## Visualize mitochondria and chloroplast filtered ASVs stats
 qiime feature-table summarize \
   --i-table ms-table-no-mitochondria-no-chloroplast.qza \
   --o-visualization ms-table-no-mitochondria-no-chloroplast.qzv \
   --m-sample-metadata-file /mnt/datasets/project_2/MS/corrected_ms_metadata.tsv
+
+# corrected_ms_metadata.tsv has 924 samples
 
 ## Frequency-based filtering (ASV's with <0.005% of total reads are filtered out as they may be sequencing errors rather than true biological variants)
 #Total reads from ms-table-no-mitochondria-no-chloroplast.qzv is 14,002,658
@@ -21,6 +25,8 @@ qiime feature-table filter-features \
 --i-table ms-table-no-mitochondria-no-chloroplast.qza \
 --p-min-frequency 700 \
 --o-filtered-table ms-mit-chlor-freq-filtered-table.qza
+
+# ms-mit-chlor-freq-filtered-table.qza has 915 samples
 
 
 ## Visualize mitochondria, chloroplast, and frequency-based filtered ASVs stats
@@ -62,6 +68,8 @@ qiime demux summarize \
   --i-data ms_demux_seqs.qza \
   --o-visualization ms_demux_seqs.qzv
 
+# ms_demux_seqs.qzv has 924 samples
+
 ## Copy file to personal computer for visualization
 scp root@10.19.139.120:/data/project2/ms_demux_seqs.qzv .
 
@@ -72,13 +80,16 @@ qiime dada2 denoise-single \
   --p-trim-left 0 \
   --p-trunc-len 151 \
   --o-representative-sequences ms-rep-seqs.qza \
-  --o-table ms-table.qza \
+  --o-table ms-table.qza \  
   --o-denoising-stats ms-stats.qza
+
+# Check this step - Should we have used the filtered ms-mit-chlor-freq-filtered-table.qza instead of ms-table.qza?
 
 ##Visualize DADA2 stats
 qiime metadata tabulate \
     --m-input-file ms-stats.qza \
     --o-visualization ms-stats.qzv
+
 
 ## Visualize ASVs stats
 qiime feature-table summarize \
