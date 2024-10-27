@@ -1,59 +1,4 @@
 # Notebook
-
-# October 16, 2024
-
-## Removing mitochondria and chloroplast sequences
-qiime taxa filter-table \
-  --i-table ms-table.qza \
-  --i-taxonomy ms-taxonomy.qza \
-  --p-exclude mitochondria,chloroplast \
-  --o-filtered-table ms-table-no-mitochondria-no-chloroplast.qza
-
-###  ms-table-no-mitochondria-no-chloroplast.qza has 921 samples
-
-## Visualize mitochondria and chloroplast filtered ASVs stats
-qiime feature-table summarize \
-  --i-table ms-table-no-mitochondria-no-chloroplast.qza \
-  --o-visualization ms-table-no-mitochondria-no-chloroplast.qzv \
-  --m-sample-metadata-file /mnt/datasets/project_2/MS/corrected_ms_metadata.tsv
-
-### corrected_ms_metadata.tsv has 924 samples
-
-## Frequency-based filtering (ASV's with <0.005% of total reads are filtered out as they may be sequencing errors rather than true biological variants)
-#Total reads from ms-table-no-mitochondria-no-chloroplast.qzv is 14,002,658
-qiime feature-table filter-features \
---i-table ms-table-no-mitochondria-no-chloroplast.qza \
---p-min-frequency 700 \
---o-filtered-table ms-mit-chlor-freq-filtered-table.qza
-
-### ms-mit-chlor-freq-filtered-table.qza has 915 samples
-
-
-## Visualize mitochondria, chloroplast, and frequency-based filtered ASVs stats
-qiime feature-table summarize \
-  --i-table ms-mit-chlor-freq-filtered-table.qza \
-  --o-visualization ms-mit-chlor-freq-filtered-table.qzv \
-  --m-sample-metadata-file /mnt/datasets/project_2/MS/corrected_ms_metadata.tsv
-
-## Transfering the mitochondria, chloroplast, and frequency-based filtered table to local computer.
-scp root@10.19.139.120:/data/project2/ms-mit-chlor-freq-filtered-table.qzv .
-
-## Generating a tree for phylogenetic diversity analyses
-qiime phylogeny align-to-tree-mafft-fasttree \
-  --i-sequences ms-rep-seqs.qza \
-  --o-alignment ms-aligned-rep-seqs.qza \
-  --o-masked-alignment ms-masked-aligned-rep-seqs.qza \
-  --o-tree ms-unrooted-tree.qza \
-  --o-rooted-tree ms-rooted-tree.qza 
-
-## Alpha-rarefaction; the sampling depth was set to 9488 to retain at least 40 samples for each MS subgroup (55.73% of features retained)
-qiime diversity alpha-rarefaction \
-  --i-table ms-mit-chlor-freq-filtered-table.qza \
-  --i-phylogeny ms-rooted-tree.qza \
-  --p-max-depth 30000 \
-  --m-metadata-file /mnt/datasets/project_2/MS/corrected_ms_metadata.tsv \
-  --o-visualization ms-alpha-rarefaction.qzv
-
 # October 15: Dataset Processing for Team Proposal
 
 ## Importing and demultiplexing MS data to the project2 directory
@@ -83,7 +28,6 @@ qiime dada2 denoise-single \
   --o-table ms-table.qza \  
   --o-denoising-stats ms-stats.qza
 
-### Check this step - Should we have used the filtered ms-mit-chlor-freq-filtered-table.qza instead of ms-table.qza?
 
 ##Visualize DADA2 stats
 qiime metadata tabulate \
@@ -123,6 +67,60 @@ qiime feature-classifier classify-sklearn \
   --o-classification ms-taxonomy.qza
 
 ## Next Steps: Taxonomic analysis
+# October 16, 2024
+
+## Removing mitochondria and chloroplast sequences
+qiime taxa filter-table \
+  --i-table ms-table.qza \
+  --i-taxonomy ms-taxonomy.qza \
+  --p-exclude mitochondria,chloroplast \
+  --o-filtered-table ms-table-no-mitochondria-no-chloroplast.qza
+
+###  ms-table-no-mitochondria-no-chloroplast.qza has 921 samples
+
+## Visualize mitochondria and chloroplast filtered ASVs stats
+qiime feature-table summarize \
+  --i-table ms-table-no-mitochondria-no-chloroplast.qza \
+  --o-visualization ms-table-no-mitochondria-no-chloroplast.qzv \
+  --m-sample-metadata-file /mnt/datasets/project_2/MS/corrected_ms_metadata.tsv
+
+### corrected_ms_metadata.tsv has 924 samples
+
+## Frequency-based filtering (ASV's with <0.005% of total reads are filtered out as they may be sequencing errors rather than true biological variants)
+#Total reads from ms-table-no-mitochondria-no-chloroplast.qzv is 14,002,658
+qiime feature-table filter-features \
+--i-table ms-table-no-mitochondria-no-chloroplast.qza \
+--p-min-frequency 700 \
+--o-filtered-table ms-mit-chlor-freq-filtered-table.qza
+
+### ms-mit-chlor-freq-filtered-table.qza has 915 samples
+
+## Visualize mitochondria, chloroplast, and frequency-based filtered ASVs stats
+qiime feature-table summarize \
+  --i-table ms-mit-chlor-freq-filtered-table.qza \
+  --o-visualization ms-mit-chlor-freq-filtered-table.qzv \
+  --m-sample-metadata-file /mnt/datasets/project_2/MS/corrected_ms_metadata.tsv
+
+## Transfering the mitochondria, chloroplast, and frequency-based filtered table to local computer.
+scp root@10.19.139.120:/data/project2/ms-mit-chlor-freq-filtered-table.qzv .
+
+## Generating a tree for phylogenetic diversity analyses
+qiime phylogeny align-to-tree-mafft-fasttree \
+  --i-sequences ms-rep-seqs.qza \
+  --o-alignment ms-aligned-rep-seqs.qza \
+  --o-masked-alignment ms-masked-aligned-rep-seqs.qza \
+  --o-tree ms-unrooted-tree.qza \
+  --o-rooted-tree ms-rooted-tree.qza 
+
+## Alpha-rarefaction; the sampling depth was set to 9488 to retain at least 40 samples for each MS subgroup (55.73% of features retained)
+qiime diversity alpha-rarefaction \
+  --i-table ms-mit-chlor-freq-filtered-table.qza \
+  --i-phylogeny ms-rooted-tree.qza \
+  --p-max-depth 30000 \
+  --m-metadata-file /mnt/datasets/project_2/MS/corrected_ms_metadata.tsv \
+  --o-visualization ms-alpha-rarefaction.qzv
+
+
 
 # October 26, 2024 Export Feature Table, Taxonomy and Phylogeny Files
 ## Generate export files in export directory
