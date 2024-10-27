@@ -6,10 +6,10 @@ library(ape)
 library(tidyverse)
 
 # Load in the ms metadata,  feature table, taxonomy file, and rooted tree
-metafp <- "meta_ms.csv"
+metafp <- "ms_export/corrected_ms_metadata.tsv"
 meta <- read_delim(metafp, delim=",")
 
-otufp <- "ms_export/ms-table.txt"
+otufp <- "ms_export/ms-mit-chlor-freq-filtered-table.txt"
 otu <- read_delim(file =otufp, delim="\t", skip=1)
 
 taxfp <- "ms_export/ms-taxonomy.tsv"
