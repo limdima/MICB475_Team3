@@ -144,3 +144,15 @@ qiime tools export \
 # Transfer export directory to local computer
 scp -r root@10.19.139.182:/home/qiime2/data/project2/ms_export .
 
+# Oct 27, 2024 Export features table, but using the filtered table rather than unfiltered ms-table.qza
+
+qiime tools export \
+  --input-path ../project2/ms-mit-chlor-freq-filtered-table.qza \
+  --output-path ms-table_export
+
+biom convert \
+-i feature-table.biom \
+--to-tsv \
+-o ms-mit-chlor-freq-filtered-table.txtls
+
+
