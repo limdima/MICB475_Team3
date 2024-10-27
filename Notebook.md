@@ -153,6 +153,9 @@ qiime tools export \
 biom convert \
 -i feature-table.biom \
 --to-tsv \
--o ms-mit-chlor-freq-filtered-table.txtls
+-o ms-mit-chlor-freq-filtered-table.txt
+
+Will also download and upload to github after for easier viewing
+
 
 
