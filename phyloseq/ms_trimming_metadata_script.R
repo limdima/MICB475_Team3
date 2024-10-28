@@ -15,14 +15,10 @@ meta <- read_delim(metafp, delim="\t")
 # transpose the otu object so the rows become columns and vice versa
 
 otu_transposed <- as.data.frame(t(otu))
-colnames(otu_transposed) <- rownames(otu)
 otu_transposed <- cbind("sample-id" = rownames(otu_transposed), otu_transposed)
 colnames(otu_transposed) <- otu_transposed[1,]
-colnames(otu_transposed)[colnames(otu_transposed) == "#OTU ID"] <- "sample-id"
-otu_transposed_test <- otu_transposed[-1,]
-
-# will simplify this code later
-
+colnames(otu_transposed)[1] <- "sample-id"
+otu_transposed <- otu_transposed[-1,]
 
 # right_join the metadata table and the otu table to filter out unwanted metadata columns:
 
