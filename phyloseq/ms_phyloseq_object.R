@@ -38,6 +38,11 @@ tax_mat <- tax_mat[,-1]
 rownames(tax_mat) <- tax$"Feature ID"
 TAX <- tax_table(tax_mat)
 
+# rarefy samples
+ms_phyloseq_rare <- rarefy_even_depth(ms_phyloseq, rngseed = 4222, sample.size = 9488)
+
 # create and save phyloseq object:
 ms_phyloseq <- phyloseq(OTU, META, TAX, phylotree)
+
 save(ms_phyloseq, file = "ms_phyloseq.RData")
+save(ms_phyloseq_rare, file = "ms_phyloseq_rare.RData")
