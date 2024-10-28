@@ -38,5 +38,6 @@ tax_mat <- tax_mat[,-1]
 rownames(tax_mat) <- tax$"Feature ID"
 TAX <- tax_table(tax_mat)
 
-# phyloseq object:
+# create and save phyloseq object:
 ms_phyloseq <- phyloseq(OTU, META, TAX, phylotree)
+save(ms_phyloseq, file = "ms_phyloseq.RData")
