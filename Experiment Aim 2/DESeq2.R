@@ -1,3 +1,6 @@
+## DESEQ CODE STARTS AT LINE 71 ##
+# Lines 4-70: metadata trimming and creating phyloseq object
+
 # load in packages:
 library(tidyverse)
 library(phyloseq)
