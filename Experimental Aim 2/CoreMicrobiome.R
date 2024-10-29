@@ -32,5 +32,9 @@ venn_pd
 ### save venn diagram
 ggsave("Experimental Aim 2/venn_ms_groups.png", plot = venn_pd)
 
-
+# check what taxa we have
+# watch out the following can take a long time and the graph needs to be modified to fit everything
+#prune_taxa(PPMS_ASVs,ms_phyloseq) %>%
+#  plot_bar(fill = "Genus") +
+#  facet_wrap(.~ disease_course, scales = "free")
 
