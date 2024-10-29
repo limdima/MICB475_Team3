@@ -6,16 +6,16 @@ library(ape)
 library(tidyverse)
 
 # Load in the ms metadata,  feature table, taxonomy file, and rooted tree
-metafp <- "ms_export/corrected_ms_metadata.tsv"
-meta <- read_delim(metafp, delim=",")
+metafp <- "phyloseq/ms_export/corrected_ms_metadata.tsv"
+meta <- read_delim(metafp, delim="\t")
 
-otufp <- "ms_export/ms-mit-chlor-freq-filtered-table.txt"
+otufp <- "phyloseq/ms_export/ms-mit-chlor-freq-filtered-table.txt"
 otu <- read_delim(file =otufp, delim="\t", skip=1)
 
-taxfp <- "ms_export/ms-taxonomy.tsv"
+taxfp <- "phyloseq/ms_export/ms-taxonomy.tsv"
 tax <- read_delim(taxfp, delim="\t")
 
-phylotreefp <- "ms_export/ms-tree.nwk"
+phylotreefp <- "phyloseq/ms_export/ms-tree.nwk"
 phylotree <- read.tree(phylotreefp)
 
 # Adjust files to be read into a phyloseq object. Make the phyloseq object.
@@ -38,11 +38,12 @@ tax_mat <- tax_mat[,-1]
 rownames(tax_mat) <- tax$"Feature ID"
 TAX <- tax_table(tax_mat)
 
-# rarefy samples
-ms_phyloseq_rare <- rarefy_even_depth(ms_phyloseq, rngseed = 4222, sample.size = 9488)
 
 # create and save phyloseq object:
 ms_phyloseq <- phyloseq(OTU, META, TAX, phylotree)
+save(ms_phyloseq, file = "phyloseq/ms_phyloseq.RData")
 
-save(ms_phyloseq, file = "ms_phyloseq.RData")
-save(ms_phyloseq_rare, file = "ms_phyloseq_rare.RData")
+
+# rarefy samples (for diversity analyses)
+ms_phyloseq_rare <- rarefy_even_depth(ms_phyloseq, rngseed = 4222, sample.size = 9488)
+save(ms_phyloseq_rare, file = "phyloseq/ms_phyloseq_rare.RData")
