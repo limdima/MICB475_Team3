@@ -171,4 +171,7 @@ Will need to consult next meeting about if this is the right way to go about it:
 
 - AH
 
+# core microbiome analysis for aim 2
+Used the unfiltered phyloseq object for now. Looks weird.. Set 0 detection and prevelence to be least stringent as possible but no unique taxa in SPMS/PPMS. Will try again later with new phyloseq object (pre-filtered) and see if that makes a difference. Maybe there are 0 values that are messing with it.
+
 
