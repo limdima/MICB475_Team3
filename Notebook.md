@@ -166,6 +166,7 @@ After filtering the metadata, it will have 522 samples \
 The metadata is further trimmed by matching the corresponding OTUs using semi_join(filter_meta, otu_transposed, by = 'sample-id'), which will only keep rows in the filtered metadata that correspond to sample-IDs 
 found in the OTU table (as some metadata will not have corresponding OTUs anymore since we did processing in QIIME2) \
 Similarly, the OTU table is trimmed down to only use the relevent sequences with corresponding metadata with semi_join(otu_transposed, filter_meta, by = 'sample-id') \
-In total there are 515 samples that we will perform analysis on. The OTU table is then re-transposed into the format phyloseq wants it in and both otu table and metadata are saved as RData files, to be put into a phyloseq object.
+In total there are 515 samples that we will perform analysis on. The OTU table is then re-transposed into the format phyloseq wants it in and both otu table and metadata are saved as RData files, to be put into a phyloseq object. \
+- AH
 
 
