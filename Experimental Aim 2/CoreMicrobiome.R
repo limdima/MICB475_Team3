@@ -30,4 +30,7 @@ venn_pd <- ggVennDiagram(x=list(RRMS = RRMS_ASVs, SPMS = SPMS_ASVs, PPMS = PPMS_
 venn_pd
 
 ### save venn diagram
-ggsave("venn_pd_vs_healthy.png", plot = venn_pd)
+ggsave("Experimental Aim 2/venn_ms_groups.png", plot = venn_pd)
+
+
+
