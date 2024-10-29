@@ -13,19 +13,19 @@ ms_plus1 <- transform_sample_counts(ms_phyloseq, function(x) x+1)
 ms_deseq <- phyloseq_to_deseq2(ms_plus1, ~`disease_course`)
 DESEQ_ms <- DESeq(ms_deseq)
 
-#results RRMS vs PPMS (RRMS is set as reference)
+#results RRMS vs PPMS 
 RRMS_vs_PPMS_res <- results(DESEQ_ms, tidy=TRUE, 
-               #this will ensure that No is your reference group
+               #(RRMS is set as reference)
                contrast = c("disease_course","PPMS","RRMS"))
 
-#results RRMS vs SPMS (RRMS is set as reference)
+#results RRMS vs SPMS 
 RRMS_vs_SPMS_res <- results(DESEQ_ms, tidy=TRUE, 
-               #this will ensure that No is your reference group
+               #(RRMS is set as reference)
                contrast = c("disease_course","SPMS","RRMS"))
 
-#results PPMS vs SPMS (SPMS is set as reference)
+#results PPMS vs SPMS 
 PPMS_vs_SPMS_res <- results(DESEQ_ms, tidy=TRUE, 
-               #this will ensure that No is your reference group
+               #(SPMS is set as reference)
                contrast = c("disease_course","PPMS","SPMS"))
 
 
