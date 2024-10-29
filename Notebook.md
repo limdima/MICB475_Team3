@@ -159,13 +159,13 @@ Will also download and upload to github after for easier viewing
 
 
 # Oct 28, 2024 Filtering metadata and OTU table from QIIME2, to put into phyloseq
-Saved in phyloseq folder. Firstly the script will take the OTU table (phyloseq/ms_export/ms-mit-chlor-freq-filtered-table.txt) and metadata (phyloseq/ms_export/corrected_ms_metadata.tsv) from QIIME2
-The OTU table is transposed (columns <-> rows) so that OTU IDs are the column names and sequence IDs are row names. This is to do a filtering join downstream with the metadata
-The metadata is filtered based on what we discussed may be confounding variables in the gut microbiome: diet, probiotics, eating disorders. 
-After filtering the metadata, it will have 522 samples
+Saved in phyloseq folder. Firstly the script will take the OTU table (phyloseq/ms_export/ms-mit-chlor-freq-filtered-table.txt) and metadata (phyloseq/ms_export/corrected_ms_metadata.tsv) from QIIME2 \
+The OTU table is transposed (columns <-> rows) so that OTU IDs are the column names and sequence IDs are row names. This is to do a filtering join downstream with the metadata \
+The metadata is filtered based on what we discussed may be confounding variables in the gut microbiome: diet, probiotics, eating disorders. \
+After filtering the metadata, it will have 522 samples \ 
 The metadata is further trimmed by matching the corresponding OTUs using semi_join(filter_meta, otu_transposed, by = 'sample-id'), which will only keep rows in the filtered metadata that correspond to sample-IDs 
-found in the OTU table (as some metadata will not have corresponding OTUs anymore since we did processing in QIIME2)
-Similarly, the OTU table is trimmed down to only use the relevent sequences with corresponding metadata with semi_join(otu_transposed, filter_meta, by = 'sample-id')
+found in the OTU table (as some metadata will not have corresponding OTUs anymore since we did processing in QIIME2) \
+Similarly, the OTU table is trimmed down to only use the relevent sequences with corresponding metadata with semi_join(otu_transposed, filter_meta, by = 'sample-id') \
 In total there are 515 samples that we will perform analysis on. The OTU table is then re-transposed into the format phyloseq wants it in and both otu table and metadata are saved as RData files, to be put into a phyloseq object.
 
 
