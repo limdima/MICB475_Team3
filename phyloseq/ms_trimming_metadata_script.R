@@ -6,10 +6,10 @@ library(ape)
 
 # load in the sequence table and the metadata table:
 
-otufp <- "ms_export/ms-mit-chlor-freq-filtered-table.txt"
+otufp <- "phyloseq/ms_export/ms-mit-chlor-freq-filtered-table.txt"
 otu <- read_delim(file =otufp, delim="\t", skip=1)
 
-metafp <- "ms_export/corrected_ms_metadata.tsv"
+metafp <- "phyloseq/ms_export/corrected_ms_metadata.tsv"
 meta <- read_delim(metafp, delim="\t")
 
 # transpose the otu object so the rows become columns and vice versa - this is done so it can be semi_joined against meta later on
@@ -51,5 +51,6 @@ rownames(otu_trimmed) <- NULL
 
 # metadata and otu table both now have 515 samples each after filtering for the variables we will include for analysis
 
-save(metadata_trimmed, file = "metadata_trimmed")
-save(otu_trimmed, file = "otu_trimmed")
+save(metadata_trimmed, file = "phyloseq/metadata_trimmed.RData")
+save(otu_trimmed, file = "phyloseq/otu_trimmed.RData")
+
