@@ -14,21 +14,42 @@ otu <- read_delim(file =otufp, delim="\t", skip=1)
 metafp <- "ms_export/corrected_ms_metadata.tsv"
 meta <- read_delim(metafp, delim="\t")
 
-# transpose the otu object so the rows become columns and vice versa:
+# transpose the otu object so the rows become columns and vice versa - this is done so it can be semi_joined against meta later on
 
-otu_transposed <- as.data.frame(t(otu))
-otu_transposed <- cbind("sample-id" = rownames(otu_transposed), otu_transposed)
-colnames(otu_transposed) <- otu_transposed[1,]
-colnames(otu_transposed)[1] <- "sample-id"
-otu_transposed <- otu_transposed[-1,]
+otu_transposed <- as.data.frame(t(otu[, -1]))    # transposes the data but excludes the first column as that will be col names
+colnames(otu_transposed) <- otu[[1]]     # first column in the original otu table is for the OTU IDs, now as the new col names for the transposed table
+otu_transposed <- cbind("sample-id" = rownames(otu_transposed), otu_transposed)   # makes a new column "sample-id" with the original header names from otu, for downstream joining
+rownames(otu_transposed) <- NULL   # removes the indexing row names
 
-# right_join the metadata table and the otu table to filter out unwanted metadata columns:
 
-combined <- right_join(meta, otu_transposed)
+# filter the metadata to get rid of variables that we deemed as potential confounders
+# We think mainly probiotics, diet, and eating disorders will contribute a larger confounding effect on the gut microbiome
 
-# separate the dataframes:
+filter_meta <- meta %>%
+  filter(probiotics == 0) %>%        
+  filter(diet_no_special_needs == 1) %>%
+  filter(eating_disorder == 0) %>%
+  
+  group_by(`household`) %>% # samples are paired by household, one MS and one control
+  filter(n() == 2) %>% # filters out any rows that do not contain two rows per household
+  ungroup()
 
-metadata_trimmed <- combined[, 1:60]
+# after filtering there is less samples in the metadata (522) than OTUs (915)
+# semi_join the metadata table and the otu table to filter out samples that we won't be including:
+# semi_join will keep only the rows in meta with a match in the otu table, without actually merging the two dataframes
+
+metadata_trimmed <- semi_join(filter_meta, otu_transposed, by = 'sample-id')
+# returns 515 samples, meaning some metadata without corresponding OTUs were also removed
+
+otu_filter <- semi_join(otu_transposed, filter_meta, by = 'sample-id')
+# returns the same corresponding 515 samples as in the metadata
+
+
+# re-transpose the otu table so that it is ready to be put into a phyloseq object, similar to before
+otu_trimmed <- as.data.frame(t(otu_filter))
+colnames(otu_trimmed) <- otu_filter[[1]]
+otu_trimmed <- cbind("#OTU ID" = rownames(otu_trimmed), otu_trimmed)   # makes a new column "#OTU ID" as in the original OTU table
+rownames(otu_trimmed) <- NULL
 
 # Load in the rest of the files needed for the phyloseq object:
 
@@ -73,11 +94,11 @@ ms_rare <- rarefy_even_depth(ms_phyloseq, rngseed = 1, sample.size = 9488)
 # ALPHA DIVERSITY ANALYSIS
 # alpha (Shannon) diversity for all samples
 
-shannon_div <- estimate_richness(ms_phyloseq_rare, measures = "Shannon")
+shannon_div <- estimate_richness(ms_rare, measures = "Shannon")
 
 # add a column for treatment status
 
-shannon_div$treatment_status <- sample_data(ms_phyloseq_rare)$treatment_status
+shannon_div$treatment_status <- sample_data(ms_rare)$treatment_status
 
 # create a box-plot to visualize diversity metrics
 
@@ -94,15 +115,15 @@ ggsave("shannon_div.png", plot = shan_vs_treatment, width = 6, height = 4)
 # BETA DIVERSITY ANALYSIS
 # beta (weighted unifrac) diversity for all samples
 
-w_unifrac_dist <- distance(ms_phyloseq_rare, method = "wunifrac")
+w_unifrac_dist <- distance(ms_rare, method = "wunifrac")
 
 # PCoA on weighted unifrac distance
 
-pcoa_wu <- ordinate(ms_phyloseq_rare, method = "PCoA", distance = w_unifrac_dist)
+pcoa_wu <- ordinate(ms_rare, method = "PCoA", distance = w_unifrac_dist)
 
 # plot PCoA
 
-w_unifrace_plot <- plot_ordination(ms_phyloseq_rare, pcoa_wu, color = "treatment_status") +
+w_unifrace_plot <- plot_ordination(ms_rare, pcoa_wu, color = "treatment_status") +
   labs(col = "Treatment Status",
        title = "PCoA for Treatment Status")
 
