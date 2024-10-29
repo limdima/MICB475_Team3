@@ -1,75 +1,10 @@
-## DESEQ CODE STARTS AT LINE 71 ##
-# Lines 4-70: metadata trimming and creating phyloseq object
-
 # load in packages:
 library(tidyverse)
 library(phyloseq)
-library(ape)
 library(DESeq2)
 
 
-# Load in the ms metadata,  feature table, taxonomy file, and rooted tree
-otufp <- "ms-mit-chlor-freq-filtered-table.txt"
-otu <- read_delim(file =otufp, delim="\t", skip=1)
-
-metafp <- "corrected_ms_metadata.tsv"
-meta <- read_delim(metafp, delim="\t")
-
-taxfp <- "ms-taxonomy.tsv"
-tax <- read_delim(taxfp, delim="\t")
-
-phylotreefp <- "ms-tree.nwk"
-phylotree <- read.tree(phylotreefp)
-
-
-### using Cyrus' trimming code
-# transpose the otu object so the rows become columns and vice versa
-otu_transposed <- as.data.frame(t(otu))
-otu_transposed <- cbind("sample-id" = rownames(otu_transposed), otu_transposed)
-colnames(otu_transposed) <- otu_transposed[1,]
-colnames(otu_transposed)[1] <- "sample-id"
-otu_transposed <- otu_transposed[-1,]
-
-
-# right_join the metadata table and the otu table to filter out unwanted metadata columns:
-combined <- right_join(meta, otu_transposed)
-
-
-# separate the dataframes:
-metadata_trimmed <- combined[, 1:60]
-
-
-### using Natalia's phyloseq code with trimmed metatdata
-# Adjust files to be read into a phyloseq object. Make the phyloseq object.
-# feature-table;
-otu_mat <- as.matrix(otu[,-1])
-rownames(otu_mat) <- otu$"#OTU ID"
-OTU <- otu_table(otu_mat, taxa_are_rows = TRUE)
-
-
-# metadata:
-meta_df <- as.data.frame(metadata_trimmed[,-1])
-rownames(meta_df) <- metadata_trimmed$"sample-id"
-META <- sample_data(meta_df)
-
-
-# taxonomy file:
-tax_mat <- tax %>%
-  select(-Confidence) %>%
-  separate(col=Taxon, sep="; ", into=c("Domain", "Phylum", "Class", "Order", "Family", "Genus", "Species")) %>%
-  as.matrix()
-tax_mat <- tax_mat[,-1]
-rownames(tax_mat) <- tax$"Feature ID"
-TAX <- tax_table(tax_mat)
-
-
-# create and save phyloseq object:
-ms_phyloseq <- phyloseq(OTU, META, TAX, phylotree)
-save(ms_phyloseq, file = "ms_phyloseq.RData")
-
-
-### Dima's DESeq2 code
-# loading in non-rarefied phyloseq object
+# loading in non-rarefied phyloseq object containing trimmed metadata (created by using ms_trimming_metada_script.R and ms_phyloseq_object.R)
 load("ms_export/ms_phyloseq.RData")
 
 
