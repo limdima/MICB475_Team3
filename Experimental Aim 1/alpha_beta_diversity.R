@@ -115,7 +115,7 @@ ggsave("shannon_div.png", plot = shan_vs_treatment, width = 6, height = 4)
 # BETA DIVERSITY ANALYSIS
 # beta (weighted unifrac) diversity for all samples
 
-w_unifrac_dist <- distance(ms_rare, method = "wunifrac")
+w_unifrac_dist <- UniFrac(ms_rare, weighted=TRUE)
 
 # PCoA on weighted unifrac distance
 
