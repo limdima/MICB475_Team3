@@ -1,9 +1,9 @@
 # load in packages:
-
 library(tidyverse)
 library(phyloseq)
 library(ape)
 library(DESeq2)
+
 
 # Load in the ms metadata,  feature table, taxonomy file, and rooted tree
 otufp <- "ms-mit-chlor-freq-filtered-table.txt"
@@ -18,6 +18,7 @@ tax <- read_delim(taxfp, delim="\t")
 phylotreefp <- "ms-tree.nwk"
 phylotree <- read.tree(phylotreefp)
 
+
 ### using Cyrus' trimming code
 # transpose the otu object so the rows become columns and vice versa
 otu_transposed <- as.data.frame(t(otu))
@@ -26,11 +27,14 @@ colnames(otu_transposed) <- otu_transposed[1,]
 colnames(otu_transposed)[1] <- "sample-id"
 otu_transposed <- otu_transposed[-1,]
 
+
 # right_join the metadata table and the otu table to filter out unwanted metadata columns:
 combined <- right_join(meta, otu_transposed)
 
+
 # separate the dataframes:
 metadata_trimmed <- combined[, 1:60]
+
 
 ### using Natalia's phyloseq code with trimmed metatdata
 # Adjust files to be read into a phyloseq object. Make the phyloseq object.
@@ -39,10 +43,12 @@ otu_mat <- as.matrix(otu[,-1])
 rownames(otu_mat) <- otu$"#OTU ID"
 OTU <- otu_table(otu_mat, taxa_are_rows = TRUE)
 
+
 # metadata:
 meta_df <- as.data.frame(metadata_trimmed[,-1])
 rownames(meta_df) <- metadata_trimmed$"sample-id"
 META <- sample_data(meta_df)
+
 
 # taxonomy file:
 tax_mat <- tax %>%
@@ -53,15 +59,16 @@ tax_mat <- tax_mat[,-1]
 rownames(tax_mat) <- tax$"Feature ID"
 TAX <- tax_table(tax_mat)
 
+
 # create and save phyloseq object:
 ms_phyloseq <- phyloseq(OTU, META, TAX, phylotree)
 save(ms_phyloseq, file = "ms_phyloseq.RData")
 
 
 ### Dima's DESeq2 code
-
 # loading in non-rarefied phyloseq object
 load("ms_export/ms_phyloseq.RData")
+
 
 #converting zeros to ones to avoid zeros error and converting phyloseq object to DESeq2 object
 ms_plus1 <- transform_sample_counts(ms_phyloseq, function(x) x+1)
