@@ -6,6 +6,7 @@ library(ape)
 library(vegan)
 library(ggplot2)
 
+
 # load in the sequence table and the metadata table:
 
 otufp <- "ms_export/ms-mit-chlor-freq-filtered-table.txt"
@@ -123,12 +124,28 @@ pcoa_wu <- ordinate(ms_rare, method = "PCoA", distance = w_unifrac_dist)
 
 # plot PCoA
 
-w_unifrace_plot <- plot_ordination(ms_rare, pcoa_wu, color = "treatment_status") +
+w_unifrac_plot <- plot_ordination(ms_rare, pcoa_wu, color = "treatment_status") +
   labs(col = "Treatment Status",
        title = "PCoA for Treatment Status")
 
-plot(w_unifrace_plot)
+plot(w_unifrac_plot)
 ggsave("w_unifrac_plot.png", plot = w_unifrac_plot, width = 6, height = 4)
 
 # Statistical tests:
 
+# Alpha diversity (Shannon) using Kruskal-Wallis test:
+
+meta_data <- data.frame(sample_data(ms_rare))
+shannon_data <- cbind(meta_data, shannon_div$Shannon)
+
+kruskal.test(shannon_div$Shannon ~ treatment_status, data = shannon_data)
+
+# p-value = 0.4007 > 0.05, the difference in alpha diversity is not significant in individual treatment statuses.
+
+# Beta divsersity (weighted unifrac) using PERMANOVA:
+
+permanova_result <- adonis2(w_unifrac_dist ~ meta_data$treatment_status)
+permanova_result
+
+# p-value = 0.008 < 0.05, the difference in beta diversity is significant between treatment statuses.
+# However, the R2 value is 0.00689, indicating that only a 0.689% of the variation can be attributed to treatment status.
