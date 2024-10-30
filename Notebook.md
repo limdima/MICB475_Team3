@@ -20,6 +20,7 @@ scp root@10.19.139.120:/data/project2/ms_demux_seqs.qzv .
 
 ## Determine ASVs with DADA2
 #medians at each position are all above 32 so keeping whole read (151bp)
+
 qiime dada2 denoise-single \
   --i-demultiplexed-seqs ms_demux_seqs.qza \
   --p-trim-left 0 \
