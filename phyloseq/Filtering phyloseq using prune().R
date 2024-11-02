@@ -36,7 +36,7 @@ tax_mat <- tax_mat[,-1]
 rownames(tax_mat) <- tax$"Feature ID"
 TAX <- tax_table(tax_mat)
 
-# create and save phyloseq object:
+# create unfiltered phyloseq object:
 unfiltered_ms_phyloseq <- phyloseq(OTU, META, TAX, phylotree)
 
 # removing duplicates from the phyloseq
@@ -45,11 +45,10 @@ unique_metadata <- meta[!duplicated(meta$`sample-id`), ]
 # Update the phyloseq object with unique samples
 unique_ms_phyloseq <- prune_samples(rownames(sample_data(unfiltered_ms_phyloseq)) %in% unique_metadata$`sample-id`, unfiltered_ms_phyloseq)
 
-# Filtering out samples from individuals on probiotics and on special diets
+# Filtering out samples from individuals on probiotics and special diets
 final_filtered_ms_phyloseq <- prune_samples(
   sample_data(unique_ms_phyloseq)$probiotic == "0" & sample_data(unique_ms_phyloseq)$diet_no_special_needs == "1",
-  unique_ms_phyloseq
-)
+  unique_ms_phyloseq)
 
-nsamples(final_filtered_ms_phyloseq)
-
+# save filtered phyloseq object:
+save(final_filtered_ms_phyloseq, file = "final_filtered_ms_phyloseq.RData")
