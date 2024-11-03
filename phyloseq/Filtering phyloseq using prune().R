@@ -50,7 +50,7 @@ unique_ms_phyloseq <- prune_samples(rownames(sample_data(unfiltered_ms_phyloseq)
 # (275 samples were removed, final sample count 640)
 final_filtered_ms_phyloseq <- prune_samples(
   sample_data(unique_ms_phyloseq)$probiotic == "0" &
-  sample_data(unique_ms_phyloseq)$diet_no_special_needs == "1"
+  sample_data(unique_ms_phyloseq)$diet_no_special_needs == "1" &
   sample_data(unique_ms_phyloseq)$eating_disorder == "0",
   unique_ms_phyloseq)
 
