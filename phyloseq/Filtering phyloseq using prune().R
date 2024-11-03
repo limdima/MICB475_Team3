@@ -57,3 +57,12 @@ final_filtered_ms_phyloseq <-
 # save phyloseq object:
 save(final_filtered_ms_phyloseq, file = "final_filtered_ms_phyloseq.RData")
 
+
+# * Code used to find the rats in the sample data:
+sample_data_df <- sample_data(final_filtered_ms_phyloseq)
+sample_data_df
+
+table(sample_data_df$household) == 1       
+unique_values <- names(table(sample_data_df$household)[table(sample_data_df$household) == 1])
+unique_values
+
