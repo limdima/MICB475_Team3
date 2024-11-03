@@ -40,14 +40,18 @@ TAX <- tax_table(tax_mat)
 unfiltered_ms_phyloseq <- phyloseq(OTU, META, TAX, phylotree)
 
 # removing duplicates from the phyloseq
+# !!! maybe not needed, does not change the metadata file which is already filtered for this I think !!!
 unique_metadata <- meta[!duplicated(meta$`sample-id`), ]
 
 # Update the phyloseq object with unique samples
 unique_ms_phyloseq <- prune_samples(rownames(sample_data(unfiltered_ms_phyloseq)) %in% unique_metadata$`sample-id`, unfiltered_ms_phyloseq)
 
-# Filtering out samples from individuals on probiotics and on special diets (271 samples were removed, final sample count 644)
+# Filtering out samples from individuals on probiotics, eating disorders and on special diets 
+# (275 samples were removed, final sample count 640)
 final_filtered_ms_phyloseq <- prune_samples(
-  sample_data(unique_ms_phyloseq)$probiotic == "0" & sample_data(unique_ms_phyloseq)$diet_no_special_needs == "1",
+  sample_data(unique_ms_phyloseq)$probiotic == "0" &
+  sample_data(unique_ms_phyloseq)$diet_no_special_needs == "1",
+  sample_data(unique_ms_phyloseq)$eating_disorder == "0",
   unique_ms_phyloseq)
 
 
