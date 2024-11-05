@@ -145,34 +145,4 @@ qiime tools export \
 # Transfer export directory to local computer
 scp -r root@10.19.139.182:/home/qiime2/data/project2/ms_export .
 
-# Oct 27, 2024 Export features table, but using the filtered table rather than unfiltered ms-table.qza
-
-qiime tools export \
-  --input-path ../project2/ms-mit-chlor-freq-filtered-table.qza \
-  --output-path ms_export
-
-biom convert \
--i feature-table.biom \
---to-tsv \
--o ms-mit-chlor-freq-filtered-table.txt
-
-Will also download and upload to github after for easier viewing
-
-
-# Oct 28, 2024 Filtering metadata and OTU table from QIIME2, to put into phyloseq
-Modified Cyrus' ms_trimming_metadata_script, saved in the phyloseq folder. Firstly the script will take the OTU table (phyloseq/ms_export/ms-mit-chlor-freq-filtered-table.txt) and metadata (phyloseq/ms_export/corrected_ms_metadata.tsv) from QIIME2 \
-The OTU table is transposed (columns <-> rows) so that OTU IDs are the column names and sequence IDs are row names. This is to do a filtering join downstream with the metadata \
-The metadata is filtered based on what we discussed may be confounding variables in the gut microbiome: diet, probiotics, eating disorders. \
-After filtering the metadata, it will have 522 samples \ 
-The metadata is further trimmed by matching the corresponding OTUs using semi_join(filter_meta, otu_transposed, by = 'sample-id'), which will only keep rows in the filtered metadata that correspond to sample-IDs 
-found in the OTU table (as some metadata will not have corresponding OTUs anymore since we did processing in QIIME2) \
-Similarly, the OTU table is trimmed down to only use the relevent sequences with corresponding metadata with semi_join(otu_transposed, filter_meta, by = 'sample-id') \
-In total there are 515 samples that we will perform analysis on. The OTU table is then re-transposed into the format phyloseq wants it in and both otu table and metadata are saved as RData files, to be put into a phyloseq object. \
-Will need to consult next meeting about if this is the right way to go about it: Should we "pre-filter" the phyloseq components like this, or is there an easier way to insert everything into a phyloseq object and have phyloseq only use samples which have every component?
-
-- AH
-
-# core microbiome analysis for aim 2
-Used the unfiltered phyloseq object for now. Looks weird.. Set 0 detection and prevelence to be least stringent as possible but no unique taxa in SPMS/PPMS. Will try again later with new phyloseq object (pre-filtered) and see if that makes a difference. Maybe there are 0 values that are messing with it.
-
 
