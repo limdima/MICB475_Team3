@@ -45,12 +45,14 @@ filtered_metadata <- meta %>%
   filter(diet_no_special_needs == 1) %>%
   filter(eating_disorder == 0) %>%
   
-  group_by(`household`) %>% 
+  group_by(`sample-id`) %>%  
+  filter(`sample-id` %in% colnames(otu_mat)) %>%  
+  group_by(`household`) %>%
   filter(n() == 2) %>% 
   ungroup()
 
 # Update the phyloseq object, keeping only samples in filtered metadata
-# Filters to 515 total samples
+# Filters to 510 total samples
 final_filtered_ms_phyloseq <- 
   prune_samples(rownames(sample_data(unfiltered_ms_phyloseq)) %in% filtered_metadata$`sample-id`, unfiltered_ms_phyloseq)
 
