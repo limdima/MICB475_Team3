@@ -19,12 +19,12 @@ PPMS_stat<- subset_samples(phyloseq_rel, disease_course == "SPMS")
 control_stat <- subset_samples(phyloseq_rel, disease_course == "Control")
 
 ### Set a prevalence threshold and abundance threshold
-RRMS_ASVs <- core_members(RRMS_stat, detection=0.0001, prevalence = 0.33)
-SPMS_ASVs <- core_members(SPMS_stat, detection=0.0001, prevalence = 0.33)
-PPMS_ASVs <- core_members(PPMS_stat, detection=0.0001, prevalence = 0.33)
-control_ASVs <- core_members(control_stat, detection=0.0001, prevalence = 0.33)
+RRMS_ASVs <- core_members(RRMS_stat, detection=0.0001, prevalence = 0.25)
+SPMS_ASVs <- core_members(SPMS_stat, detection=0.0001, prevalence = 0.25)
+PPMS_ASVs <- core_members(PPMS_stat, detection=0.0001, prevalence = 0.25)
+control_ASVs <- core_members(control_stat, detection=0.0001, prevalence = 0.25)
 # Exclude very rare ASVs (detection = 0.001% relative abundance)
-# Find ASVs present in 33% of samples (prevalence = 0.33), to account for outliers/ASVs unique to only 1 person
+# Find ASVs present in 33% of samples (prevalence = 0.25), to account for outliers/ASVs unique to only 1 person
 
 ### Make a Venn-diagram
 venn_pd <- ggVennDiagram(x=list(RRMS = RRMS_ASVs, SPMS = SPMS_ASVs, PPMS = PPMS_ASVs, Control = control_ASVs)) +
@@ -40,7 +40,7 @@ ggsave("Experimental Aim 2/venn_ms_groups.png", plot = venn_pd)
 # (not 100% sure how the code works but copied from core microbiome tutorial websites)
 # https://microbiome.github.io/tutorials/CoremicrobiotaAmplicon.html
 
-prevalences <- seq(0.33, 1, .1) # set prevalence threshold from 0.33 to 1, in increments of 0.1  
+prevalences <- seq(0.25, 1, .1) # set prevalence threshold from 0.33 to 1, in increments of 0.1  
 detections <- seq(0.0001, 0.05, 0.002) 
 # detection threshold from 0.0001 to get rid of low-abundance ASVs, 
 # up to 0.05 (to just view what is rare/common), in increments of 0.002
