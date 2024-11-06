@@ -22,4 +22,5 @@
 * Indicator species analysis
   * do not worry too much about the statistics
   * low abundance does not correlate with relevance: look into species even if they are not abundant
-  
+* DESeq2 look into top 3-5 most and least abundant genera
+* Next meeting at 2PM Nov 13 over zoom  
