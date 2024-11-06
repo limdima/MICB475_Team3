@@ -93,3 +93,5 @@ permanova_result
 
 # p-value = 0.002 < 0.05, the difference in beta diversity is significant between treatment statuses.
 # However, the R2 value is 0.01868, indicating that only a 1.87% of the variation can be attributed to treatment status.
+
+# testing git
