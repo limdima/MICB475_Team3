@@ -135,6 +135,25 @@ summary_PMS <- merge_PMS_tidy %>%
 # Only 19 rows appear
 # Some ASVs correspond to the same genus_species? e.g. g__Peptoniphilus_NA
 
+# For control group only
+subset_C <- prune_taxa(only_C, phyloseq_rel) # Keeps the 21 ASVs that are unique to RRMS samples
+taxa_C <- as.data.frame(tax_table(subset_C)) # take taxa names and Abundance values (otu table) into dataframes
+abund_C <- as.data.frame(otu_table(subset_C))
+
+taxa_C$ASV <- rownames(taxa_C)   # set the row names to an actual column 
+abund_C$ASV <- rownames(abund_C)
+
+merge_C_df <- merge(taxa_C, abund_C, by = "ASV")  # merge the dataframes together
+merge_C_tidy <- merge_C_df %>% gather(key = "SampleID", value = "RelAbundance", 
+                                      - ASV, -Domain, -Phylum, -Class, -Order, -Family, -Genus, -Species) %>%
+  mutate(GenusSpecies = paste(Genus, Species, sep = "_"))
+
+summary_C <- merge_C_tidy %>%
+  group_by(GenusSpecies) %>%
+  summarize(MeanAbundance = mean(RelAbundance, na.rm = TRUE))  
+# 12 ASVs unique to control
+
+
 ### Plots for the summary tables
 
 # ASVs in RRMS only
@@ -158,7 +177,7 @@ plot_unique_MS <- ggplot(summary_MS, aes(x = reorder(GenusSpecies, MeanAbundance
 
 ggsave("Experimental Aim 2/Visualizations/MS_Unique_Species.png", plot = plot_unique_MS)
 
-
+# ASVs in progressive MS only
 plot_unique_PMS <- ggplot(summary_PMS, aes(x = reorder(GenusSpecies, MeanAbundance), y= MeanAbundance)) +
   geom_bar(stat = "identity") +
   coord_flip() + 
@@ -167,4 +186,15 @@ plot_unique_PMS <- ggplot(summary_PMS, aes(x = reorder(GenusSpecies, MeanAbundan
        y = "Average relative abundance")
 
 ggsave("Experimental Aim 2/Visualizations/PMS_Unique_Species.png", plot = plot_unique_PMS)
+
+
+# ASVs in control group only
+plot_unique_control <- ggplot(summary_C, aes(x = reorder(GenusSpecies, MeanAbundance), y= MeanAbundance)) +
+  geom_bar(stat = "identity") +
+  coord_flip() + 
+  labs(title = "Mean Relative abundance per ASV unique to Progressive MS",
+       x = "Species",
+       y = "Average relative abundance")
+
+ggsave("Experimental Aim 2/Visualizations/Control_Unique_Species.png", plot = plot_unique_control)
 
