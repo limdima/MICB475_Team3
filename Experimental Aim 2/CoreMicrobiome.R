@@ -23,7 +23,7 @@ RRMS_ASVs <- core_members(RRMS_stat, detection=0.0001, prevalence = 0.25)
 SPMS_ASVs <- core_members(SPMS_stat, detection=0.0001, prevalence = 0.25)
 PPMS_ASVs <- core_members(PPMS_stat, detection=0.0001, prevalence = 0.25)
 control_ASVs <- core_members(control_stat, detection=0.0001, prevalence = 0.25)
-# Exclude very rare ASVs (detection = 0.001% relative abundance)
+# Exclude very rare ASVs (detection = 0.01% relative abundance)
 # Find ASVs present in 33% of samples (prevalence = 0.25), to account for outliers/ASVs unique to only 1 person
 
 ### Make a Venn-diagram
@@ -192,7 +192,7 @@ ggsave("Experimental Aim 2/Visualizations/PMS_Unique_Species.png", plot = plot_u
 plot_unique_control <- ggplot(summary_C, aes(x = reorder(GenusSpecies, MeanAbundance), y= MeanAbundance)) +
   geom_bar(stat = "identity") +
   coord_flip() + 
-  labs(title = "Mean Relative abundance per ASV unique to Progressive MS",
+  labs(title = "Mean Relative abundance per ASV unique to Control",
        x = "Species",
        y = "Average relative abundance")
 
