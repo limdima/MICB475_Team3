@@ -3,6 +3,7 @@
 
 2. Using git and github to pull and push files
 # Meeting Notes
+* For the alpha-diversity plots in Aim 1, all plots are useful and can definitely be added to the supplementary section. Plots A and B show the clear distribution and may be favourable to use as a figure.
 * For the boxplots of high-abundance species specific to MS-types (Andrew's plots) try to blast the ASVs to examine the species level. Also, make sure to check the limit of detection.
   * Note the y-axis title (switch to "Taxa")
 
