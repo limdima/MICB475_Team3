@@ -1,4 +1,4 @@
-### ASV code --> Genus species (# of BLAST hits)
+## ASV code --> Genus species (# of BLAST hits)
 
 "c9e25d9130359869db0c8fca59bdb623" --> Coprobacter fastidiosus (5)
 
