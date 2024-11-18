@@ -1,4 +1,4 @@
-### (#) = number of hits on NCBI BLAST
+## ASV code --> Genus species (# of BLAST hits)
 
 "5cc8602f11bd55a73d752cd25486851c" --> Bacteroides eggerthii (14)
 
