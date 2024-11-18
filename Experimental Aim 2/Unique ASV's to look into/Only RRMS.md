@@ -13,4 +13,4 @@
 "01ae42ba9c06bdfde13977a769342a97" --> Anaerobutyricum halii (4) or Lachnospiraceae bacterium (19)
 
 
-(#) = number of hits on NCBI BLAST
+### (#) = number of hits on NCBI BLAST
