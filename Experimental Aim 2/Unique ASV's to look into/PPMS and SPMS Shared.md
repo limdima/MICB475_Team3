@@ -1,22 +1,24 @@
-"c9e25d9130359869db0c8fca59bdb623" -->
+### ASV code --> Genus species (# of BLAST hits)
 
-"899577a10741d336f48d2be23f9b0be7" -->
+"c9e25d9130359869db0c8fca59bdb623" --> Coprobacter fastidiosus (5)
 
-"30c4e6e8ec391ad07eb6a1165cf46311" -->
+"899577a10741d336f48d2be23f9b0be7" --> Porphyromonas asaccharolytica (22)
 
-"a3618e8a69964558653b32f21cfc09c4" -->
+"30c4e6e8ec391ad07eb6a1165cf46311" --> Porphyromonas (40)
 
-"d52a0395431a1912fd52bda732cd2784"-->
+"a3618e8a69964558653b32f21cfc09c4" --> Alistipes indistinctus (14)
 
-"babe546a127e4bbe62e70c16fdffa445" -->
+"d52a0395431a1912fd52bda732cd2784"--> Varibaculum cambriense (19)
 
-"108e0608762167afe331ab95f986e1ce"-->
+"babe546a127e4bbe62e70c16fdffa445" --> Holdemanella (12) biformis (6)
 
-"fa15ed91d7859d7d7a88c34650b26a5d" -->
+"108e0608762167afe331ab95f986e1ce"--> Uncultured (many hits with different genera)
 
-"452bb8f858c11e9e5276b10d432ac72f" -->
+"fa15ed91d7859d7d7a88c34650b26a5d" --> Anaerococcus (40) vaginalis (8)
 
-"3ade22141b73fba85587bd567e611553" -->
+"452bb8f858c11e9e5276b10d432ac72f" --> Clostidiaceae (8), Tissierellaceae (5), Ezakiella (5)
+
+"3ade22141b73fba85587bd567e611553" --> Aedoeadaptatus urinae (4), Peproniphilus (11)
 
 "58b1c0badb3c55cb6154db46b4571700" -->
 
