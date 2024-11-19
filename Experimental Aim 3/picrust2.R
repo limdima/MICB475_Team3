@@ -35,10 +35,11 @@ library(ggh4x)
 
 
 #### Import files and preparing tables ####
-#Importing the pathway PICrsut2
+#Importing the pathway PICrust2
 abundance_file <- "pathway_abundance.tsv"
-abundance_data <- read_delim(abundance_file, delim = "\t", col_names = TRUE, trim_ws = TRUE)
+abundance_data <- read_delim(abundance_file, delim = "\t", col_names = TRUE, trim_ws = TRUE, skip = 1)
 abundance_data  =as.data.frame(abundance_data)
+colnames(abundance_data)[1] <- "pathways"
 
 #Import your metadata file, no need to filter yet
 metadata <- read_delim("corrected_ms_metadata.tsv")
@@ -47,11 +48,11 @@ metadata <- read_delim("corrected_ms_metadata.tsv")
 #If you have multiple variants, filter your metadata to include only 2 at a time
 
 #Remove NAs for your column of interest in this case subject
-metadata = metadata[!is.na(metadata$subject),]
+metadata = metadata[!is.na(metadata$disease_course),]
 
 #Filtering the abundance table to only include samples that are in the filtered metadata
 sample_names = metadata$'sample-id'
-sample_names = append(sample_names, "pathway")
+sample_names = append(sample_names, "pathways")
 abundance_data_filtered = abundance_data[, colnames(abundance_data) %in% sample_names] #This step is the actual filtering
 
 #Removing individuals with no data that caused a problem for pathways_daa()
@@ -66,8 +67,8 @@ metadata = metadata[metadata$`sample-id` %in% abun_samples,] #making sure the fi
 
 #### DESEq ####
 #Perform pathway DAA using DESEQ2 method
-abundance_daa_results_df <- pathway_daa(abundance = abundance_data_filtered %>% column_to_rownames("pathway"), 
-                                        metadata = metadata, group = "subject", daa_method = "DESeq2")
+abundance_daa_results_df <- pathway_daa(abundance = abundance_data_filtered %>% column_to_rownames("pathways"), 
+                                        metadata = metadata, group = "disease_course", daa_method = "DESeq2")
 
 # Annotate MetaCyc pathway so they are more descriptive
 metacyc_daa_annotated_results_df <- pathway_annotation(pathway = "MetaCyc", 
@@ -82,16 +83,22 @@ feature_desc$feature = feature_desc$description
 feature_desc = feature_desc[,c(1:7)]
 colnames(feature_desc) = colnames(feature_with_p_0.05)
 
+
+#IDK WTF IS HAPPENING STARTING HERE
 #Changing the pathway column to description for the abundance table
-abundance = abundance_data_filtered %>% filter(pathway %in% feature_with_p_0.05$feature)
+abundance = abundance_data_filtered %>% filter(pathways %in% feature_with_p_0.05$feature)
 colnames(abundance)[1] = "feature"
 abundance_desc = inner_join(abundance,metacyc_daa_annotated_results_df, by = "feature")
 abundance_desc$feature = abundance_desc$description
 #this line will change for each dataset. 34 represents the number of samples in the filtered abundance table
-abundance_desc = abundance_desc[,-c(34:ncol(abundance_desc))] 
+abundance_desc = abundance_desc[,-c(917:ncol(abundance_desc))] 
+
+rownames(abundance_desc) <- abundance_desc$feature
+abundance_data <- abundance_data[,-1]
+
 
 # Generate a heatmap
-pathway_heatmap(abundance = abundance_desc %>% column_to_rownames("feature"), metadata = metadata, group = "subject")
+pathway_heatmap(abundance = abundance_desc %>% column_to_rownames("feature"), metadata = metadata, group = "disease_course")
 
 # Generate pathway PCA plot
 pathway_pca(abundance = abundance_data_filtered %>% column_to_rownames("pathway"), metadata = metadata, group = "subject")
