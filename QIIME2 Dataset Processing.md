@@ -156,3 +156,33 @@ biom convert \
 -o ms-mit-chlor-freq-filtered-table.txt
 
 
+# Nov 18, 2024 PICRUsT2 step in QIIME2 completed
+New directory in project2 on the shared server data/project2/picrust2
+
+qiime feature-table filter-features \
+  --i-table ms-table-no-mitochondria-no-chloroplast.qza \
+  --p-min-frequency 5 \
+  --o-filtered-table feature-frequency-filtered-table.qza
+
+qiime picrust2 full-pipeline \
+  --i-table feature-frequency-filtered-table.qza \
+  --i-seq ms-rep-seqs.qza \
+  --output-dir q2-picrust2_output \
+  --p-placement-tool sepp \
+  --p-hsp-method pic \
+  --p-max-nsti 2 \
+  --verbose
+
+  ## Output files saved in the picrust2/pathabun directory path and converted to human readable files
+qiime tools export \
+  --input-path q2-picrust2_output/pathway_abundance.qza \
+  --output-path pathabun_exported
+
+## use pathway_abundance.tsv to export and use in downstream R analysis
+biom convert \
+   -i feature-table.biom \
+   -o pathway_abundance.tsv \
+   --to-tsv
+
+  
+
