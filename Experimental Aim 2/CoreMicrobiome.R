@@ -94,7 +94,8 @@ merge_RRMS_tidy <- merge_RRMS_df %>% gather(key = "SampleID", value = "RelAbunda
 
 summary_RRMS <- merge_RRMS_tidy %>%
   group_by(GenusSpecies) %>%
-  summarize(MeanAbundance = mean(RelAbundance, na.rm = TRUE))  # Summarizes the 7 ASVs (Genus') and the mean relative abundance values
+  summarize(MeanAbundancePct = mean(RelAbundance, na.rm = TRUE)*100)  # Convert the relative abundance values to percentage
+# Summarizes the 7 ASVs (Genus') and the mean relative abundance values
 
 
 # For in RRMS, SPMS, PPMS only
@@ -112,7 +113,7 @@ merge_MS_tidy <- merge_MS_df %>% gather(key = "SampleID", value = "RelAbundance"
 
 summary_MS <- merge_MS_tidy %>%
   group_by(GenusSpecies) %>%
-  summarize(MeanAbundance = mean(RelAbundance, na.rm = TRUE))  
+  summarize(MeanAbundancePct = mean(RelAbundance, na.rm = TRUE)*100)   # Convert the relative abundance values to percentage
 # Summarizes the 5 ASVs (Genus') and the mean relative abundance values in the MS groups only\
 
 
@@ -131,7 +132,7 @@ merge_PMS_tidy <- merge_PMS_df %>% gather(key = "SampleID", value = "RelAbundanc
 
 summary_PMS <- merge_PMS_tidy %>%
   group_by(GenusSpecies) %>%
-  summarize(MeanAbundance = mean(RelAbundance, na.rm = TRUE))  
+  summarize(MeanAbundancePct = mean(RelAbundance, na.rm = TRUE)*100)  # Convert the relative abundance values to percentage
 # Only 19 rows appear
 # Some ASVs correspond to the same genus_species? e.g. g__Peptoniphilus_NA
 
@@ -150,51 +151,56 @@ merge_C_tidy <- merge_C_df %>% gather(key = "SampleID", value = "RelAbundance",
 
 summary_C <- merge_C_tidy %>%
   group_by(GenusSpecies) %>%
-  summarize(MeanAbundance = mean(RelAbundance, na.rm = TRUE))  
+  summarize(MeanAbundancePct = mean(RelAbundance, na.rm = TRUE)*100)  # Convert the relative abundance values to percentage
 # 12 ASVs unique to control
 
 
 ### Plots for the summary tables
 
 # ASVs in RRMS only
-plot_unique_RRMS <- ggplot(summary_RRMS, aes(x = reorder(GenusSpecies, MeanAbundance), y= MeanAbundance)) +
+plot_unique_RRMS <- ggplot(summary_RRMS, aes(x = reorder(GenusSpecies, MeanAbundancePct), y= MeanAbundancePct)) +
   geom_bar(stat = "identity") +
   coord_flip() + 
   labs(title = "Mean Relative abundance per ASV unique to RRMS",
        x = "Species",
-       y = "Average relative abundance")
+       y = "Average relative abundance (%)") +
+  theme_classic()
 
 ggsave("Experimental Aim 2/Visualizations/RRMS_Unique_Species.png", plot = plot_unique_RRMS)
 
 
 # ASVs in all MS groups 
-plot_unique_MS <- ggplot(summary_MS, aes(x = reorder(GenusSpecies, MeanAbundance), y= MeanAbundance)) +
+plot_unique_MS <- ggplot(summary_MS, aes(x = reorder(GenusSpecies, MeanAbundancePct), y= MeanAbundancePct)) +
   geom_bar(stat = "identity") +
   coord_flip() + 
   labs(title = "Mean Relative abundance per ASV unique to MS groups",
        x = "Species",
-       y = "Average relative abundance")
+       y = "Average relative abundance (%)")+
+  theme_classic()
 
 ggsave("Experimental Aim 2/Visualizations/MS_Unique_Species.png", plot = plot_unique_MS)
 
 # ASVs in progressive MS only
-plot_unique_PMS <- ggplot(summary_PMS, aes(x = reorder(GenusSpecies, MeanAbundance), y= MeanAbundance)) +
+plot_unique_PMS <- ggplot(summary_PMS, aes(x = reorder(GenusSpecies, MeanAbundancePct), y= MeanAbundancePct)) +
   geom_bar(stat = "identity") +
   coord_flip() + 
   labs(title = "Mean Relative abundance per ASV unique to Progressive MS",
        x = "Species",
-       y = "Average relative abundance")
+       y = "Average relative abundance (%)")+
+  theme_classic()
 
 ggsave("Experimental Aim 2/Visualizations/PMS_Unique_Species.png", plot = plot_unique_PMS)
 
 
 # ASVs in control group only
-plot_unique_control <- ggplot(summary_C, aes(x = reorder(GenusSpecies, MeanAbundance), y= MeanAbundance)) +
+plot_unique_control <- ggplot(summary_C, aes(x = reorder(GenusSpecies, MeanAbundancePct), y= MeanAbundancePct)) +
   geom_bar(stat = "identity") +
   coord_flip() + 
   labs(title = "Mean Relative abundance per ASV unique to Control",
        x = "Species",
-       y = "Average relative abundance")
+       y = "Average relative abundance (%)")+
+  theme_classic()
+
 
 ggsave("Experimental Aim 2/Visualizations/Control_Unique_Species.png", plot = plot_unique_control)
 
