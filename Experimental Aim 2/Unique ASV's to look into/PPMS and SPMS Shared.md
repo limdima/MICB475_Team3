@@ -7,6 +7,8 @@ Porphyromonas asaccharolytica (22) --> "899577a10741d336f48d2be23f9b0be7"
   - opportunistic pathogens and have been associated with systemic inflammation
   - presence of Porphyromonas asaccharolytica could indicate a pro-inflammatory shift in the microbiota, contributing to gut dysbiosis and immune activation
   - chronic inflammation driven by proteolytic bacterial activity may exacerbate MS progression, particularly in progressive forms like PPMS and SPMS
+  - associated with colon cancer (https://www.sciencedirect.com/topics/biochemistry-genetics-and-molecular-biology/porphyromonas-asaccharolytica)
+  - the causative agent of Lemierre's syndrome
 
 Porphyromonas (40) --> "30c4e6e8ec391ad07eb6a1165cf46311"
   - link between Porphyromonas and systemic inflammation is well-documented
