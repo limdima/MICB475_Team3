@@ -37,77 +37,88 @@ library(dplyr)
 
 #### Import files and preparing tables ####
 #Importing the pathway PICrust2
-abundance_file <- "pathway_abundance.tsv"
+abundance_file <- "Experimental Aim 3/pathway_abundance.tsv"
 abundance_data <- read_delim(abundance_file, delim = "\t", col_names = TRUE, trim_ws = TRUE, skip = 1)
 abundance_data  =as.data.frame(abundance_data)
 colnames(abundance_data)[1] <- "pathways"
 
 #Import your metadata file, no need to filter yet
-metadata <- read_delim("corrected_ms_metadata.tsv")
-
-#Example Looking at subject number
-#If you have multiple variants, filter your metadata to include only 2 at a time
+metadata <- read_delim("Experimental Aim 3/corrected_ms_metadata.tsv")
 
 #Remove NAs for your column of interest in this case subject
 metadata = metadata[!is.na(metadata$disease_course),]
 
-SPMS_vs_control <- c("SPMS", "Control")
-PPMS_vs_control <- c("PPMS", "Control")
-RRMS_vs_control <- c("RRMS", "Control")
-SPMS_vs_PPMS <- c("SPMS", "PPMS")
-SPMS_vs_RRMS <- c("SPMS", "RRMS")
-PPMS_vs_RRMS <- C("PPMS", "RRMS")
+#Example Looking at subject number
+#If you have multiple variants, filter your metadata to include only 2 at a time
+metadata_SPMS_vs_control <- filter(metadata, disease_course == "SPMS" | disease_course == "Control")
+metadata_PPMS_vs_control <- filter(metadata, disease_course == "PPMS" | disease_course == "Control")
+metadata_RRMS_vs_control <- filter(metadata, disease_course == "RRMS" | disease_course == "Control")
+metadata_SPMS_vs_PPMS <- filter(metadata, disease_course == "SPMS" | disease_course == "PPMS")
+metadata_SPMS_vs_RRMS <- filter(metadata, disease_course == "SPMS" | disease_course == "RRMS")
+metadata_PPMS_vs_RRMS <- filter(metadata, disease_course == "PPMS" | disease_course == "RRMS")
 
-metadata_svc <- metadata[metadata$disease_course %in% SPMS_vs_control, ]
 
-#Starting with SPMS vs control
 #Filtering the abundance table to only include samples that are in the filtered metadata
-sample_names_svc = metadata_svc$'sample-id'
-sample_names_svc = append(sample_names_svc, "pathways")
-abundance_data_filtered_svc = abundance_data[, colnames(abundance_data) %in% sample_names_svc] #This step is the actual filtering
+sample_names = metadata_SPMS_vs_control$'sample-id'
+sample_names = append(sample_names, "pathways")
+abundance_data_filtered = abundance_data[,colnames(abundance_data) %in% sample_names] #This step is the actual filtering
+# 512 samples in abundance data filtered for SPMS and control
+
 
 #Removing individuals with no data that caused a problem for pathways_daa()
-abundance_data_filtered_svc =  abundance_data_filtered_svc[, colSums(abundance_data_filtered_svc != 0) > 0]
+abundance_data_filtered =  abundance_data_filtered[, colSums(abundance_data_filtered != 0) > 0]
 
 #Ensuring the rownames for the abundance_data_filtered is empty. This is required for their functions to run.
-rownames(abundance_data_filtered_svc) = NULL
+rownames(abundance_data_filtered) = NULL
 
 #verify samples in metadata match samples in abundance_data
-abun_samples_svc = rownames(t(abundance_data_filtered_svc[,-1])) #Getting a list of the sample names in the newly filtered abundance data
-metadata_svc = metadata_svc[metadata_svc$`sample-id` %in% abun_samples_svc,] #making sure the filtered metadata only includes these samples
+abun_samples = rownames(t(abundance_data_filtered[,-1])) #Getting a list of the sample names in the newly filtered abundance data
+metadata = metadata[metadata$`sample-id` %in% abun_samples,] #making sure the filtered metadata only includes these samples
 
 #### DESEq ####
 #Perform pathway DAA using DESEQ2 method
-abundance_daa_results_df_svc <- pathway_daa(abundance = abundance_data_filtered_svc %>% column_to_rownames("pathways"), 
+abundance_daa_results_df <- pathway_daa(abundance = abundance_data_filtered %>% column_to_rownames("pathways"), 
                                         metadata = metadata, group = "disease_course", daa_method = "DESeq2")
 
 # Annotate MetaCyc pathway so they are more descriptive
-metacyc_daa_annotated_results_df_svc <- pathway_annotation(pathway = "MetaCyc", 
-                                                       daa_results_df = abundance_daa_results_df_svc, ko_to_kegg = FALSE)
+metacyc_daa_annotated_results_df <- pathway_annotation(pathway = "MetaCyc", 
+                                                       daa_results_df = abundance_daa_results_df, ko_to_kegg = FALSE)
 
 # Filter p-values to only significant ones
-feature_with_p_0.05_svc <- metacyc_daa_annotated_results_df_svc %>% filter(p_values < 0.05)
+feature_with_p_0.005 <- abundance_daa_results_df %>% filter(p_values < 0.005)  # Filtered for p vales < 0.005 (more stringent, filters out more pathways)
 
 #Changing the pathway column to description for the results 
-feature_desc_svc = inner_join(feature_with_p_0.05_svc,metacyc_daa_annotated_results_df_svc, by = "feature", copy = FALSE)
-feature_desc_svc$feature = feature_desc_svc$description
-feature_desc_svc = feature_desc_svc[,c(1:7)]
-colnames(feature_desc_svc) = colnames(feature_with_p_0.05_svc)
+feature_desc = inner_join(feature_with_p_0.005,metacyc_daa_annotated_results_df, by = "feature")
+feature_desc$feature = feature_desc$description
+feature_desc = feature_desc[,c(1:7)]
+colnames(feature_desc) = colnames(feature_with_p_0.005)
 
 #Changing the pathway column to description for the abundance table
-abundance_svc = abundance_data_filtered_svc %>% filter(pathways %in% feature_with_p_0.05_svc$feature)
-colnames(abundance_svc)[1] = "feature"
-abundance_desc_svc = inner_join(abundance_svc,metacyc_daa_annotated_results_df_svc, by = "feature")
-abundance_desc_svc$feature = abundance_desc_svc$description
-#this line will change for each dataset. 34 represents the number of samples in the filtered abundance table
-abundance_desc_svc = abundance_desc_svc[,-c(520:ncol(abundance_desc_svc))] 
+abundance = abundance_data_filtered %>% filter(pathways %in% feature_with_p_0.005$feature)
+colnames(abundance)[1] = "feature"
+abundance_desc = inner_join(abundance,metacyc_daa_annotated_results_df, by = "feature")
+abundance_desc$feature = abundance_desc$description
+
+#this line will change for each dataset. 512 represents the number of samples in the filtered abundance table for SPMS/Control
+abundance_desc = abundance_desc[,-c(513:ncol(abundance_desc))] 
 
 # Generate a heatmap
-pathway_heatmap(abundance = abundance_desc_svc %>% column_to_rownames("feature"), metadata = metadata_svc, group = "disease_course")
+pathway_heatmap(abundance = abundance_desc %>% column_to_rownames("feature"), 
+                metadata = metadata, 
+                group = "disease_course")
 
+
+
+
+
+# NEED TO TROUBLESHOOT: 
 # Generate pathway PCA plot
-pathway_pca(abundance = abundance_data_filtered %>% column_to_rownames("pathway"), metadata = metadata, group = "subject")
+pathway_pca(abundance = abundance_data_filtered %>% column_to_rownames("pathways"), metadata = metadata_SPMS_vs_control, group = "disease_course")
 
+
+
+
+### TO DO IF PREFERED: 
 # Generating a bar plot representing log2FC from the custom deseq2 function
 
 # Go to the Deseq2 function script and update the metadata category of interest
