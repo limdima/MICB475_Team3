@@ -103,10 +103,11 @@ abundance_desc$feature = abundance_desc$description
 abundance_desc = abundance_desc[,-c(513:ncol(abundance_desc))] 
 
 # Generate a heatmap
-pathway_heatmap(abundance = abundance_desc %>% column_to_rownames("feature"), 
+heatmap_SPMS_control <- pathway_heatmap(abundance = abundance_desc %>% column_to_rownames("feature"), 
                 metadata = metadata, 
                 group = "disease_course")
 
+ggsave("Experimental Aim 3/Visualizations/heatmap SPMS vs Control.png", plot = heatmap_SPMS_control)
 
 
 # NEED TO TROUBLESHOOT: 
