@@ -11,3 +11,5 @@
   * take average Z scores for control and ms subtype
   * violin plots for top 5 pathways: x axis -> pathways, y-axis -> Z scores
 * treated vs untreated violin plots will be supplemental figures
+* next meeting is the last one before the start of the presentations
+* BLASTN unique ASVs against ref seq genome database
