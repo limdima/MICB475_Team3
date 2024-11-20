@@ -1,4 +1,5 @@
 # Meeting Agenda
-1.
+1. Discuss the progress on aim 3 and a final overview of aim 2 figures. 
+2. 
 # Meeting Notes
 *
