@@ -4,11 +4,9 @@ Coprobacter fastidiosus (5) --> "c9e25d9130359869db0c8fca59bdb623"
   - not well documented
 
 Porphyromonas asaccharolytica (22) --> "899577a10741d336f48d2be23f9b0be7"
-  - opportunistic pathogens and have been associated with systemic inflammation
-  - presence of Porphyromonas asaccharolytica could indicate a pro-inflammatory shift in the microbiota, contributing to gut dysbiosis and immune activation
-  - chronic inflammation driven by proteolytic bacterial activity may exacerbate MS progression, particularly in progressive forms like PPMS and SPMS
-  - associated with colon cancer (https://www.sciencedirect.com/topics/biochemistry-genetics-and-molecular-biology/porphyromonas-asaccharolytica)
-  - the causative agent of Lemierre's syndrome
+  - strongly associated with colorectal cancer development (https://bmcmicrobiol.biomedcentral.com/articles/10.1186/s12866-022-02712-w?utm_source=chatgpt.com#Sec18)
+  - but negatively associated with ulcerative colitis which is a type of IBS (https://libkey.io/libraries/498/articles/594344926/full-text-file?utm_source=api_542)
+  - in the cervix, has been found to induce the overexpression of inflammatory genes in cervical epithelial cells (https://libkey.io/libraries/498/articles/594344926/full-text-file)
 
 Porphyromonas (40) --> "30c4e6e8ec391ad07eb6a1165cf46311"
   - link between Porphyromonas and systemic inflammation is well-documented
@@ -59,7 +57,7 @@ Firmicutes (11) --> "fa40a49dc9c8771ebb27a4ed45a52c3f"
   - broad function within the genus
 
 Tyzzerella nexilis (16) --> "04e776b2dcbfa3b930453bf71dbfae6c"
-  - SCFA production and carbohydrate fermentation
+  - Enrichment of specific T. nexilis strains correlates with the more severe, progressive form of MS due to susceptibility to mobile genetic elements     (https://www.sciencedirect.com/science/article/pii/S2211124724011367)
 
 Blautia stercoris (4) --> "83b0d8c3e6a9e5f7a22b19d6b797f21e"
   - SCFA production and anti-inflammatory effects
