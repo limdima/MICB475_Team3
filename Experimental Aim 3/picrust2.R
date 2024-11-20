@@ -109,13 +109,19 @@ pathway_heatmap(abundance = abundance_desc %>% column_to_rownames("feature"),
 
 
 
-
-
 # NEED TO TROUBLESHOOT: 
+# Seemingly because in the abundance_data_filtered, there are some cells that have 0.0000e+00 which is messing with the PCA function
+# To circumvent, log transform then removed Inf values (though this may remove a lot of rows)
+
 # Generate pathway PCA plot
-pathway_pca(abundance = abundance_data_filtered %>% column_to_rownames("pathways"), metadata = metadata_SPMS_vs_control, group = "disease_course")
+meta_rename = metadata %>% dplyr::rename(`sample_name` = `sample-id`)
+colnames_abundance_data_filtered <- abundance_data_filtered %>% column_to_rownames("pathways")
+colnames_abundance_data_filtered <-  log(colnames_abundance_data_filtered)
+colnames_abundance_data_filtered <- colnames_abundance_data_filtered[apply(colnames_abundance_data_filtered, 1, function(x) !any(x == -Inf)), ]
 
-
+pathway_pca(abundance = colnames_abundance_data_filtered, 
+            metadata = meta_rename, 
+            group = "disease_course")
 
 
 ### TO DO IF PREFERED: 
