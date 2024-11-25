@@ -1,3 +1,12 @@
+NOTE: Currently, the plots for disease course and treatment status have the same colours, but I will change the colours for the treatment status! Disease course colours will stay
+
+***FOR DISEASE COURSE***
+- notes to be added
+
+
+
+
+***FOR TREATMENT STATUS***
 
 ***Alpha diversity: (alpha_diversity_plots.png)***
 
