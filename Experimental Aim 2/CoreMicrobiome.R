@@ -59,7 +59,7 @@ venn_pd_test
 
 
 ### save venn diagram
-ggsave("Experimental Aim 2/Visualizations/venn_ms_groups.png", plot = venn_pd)
+ggsave("Experimental Aim 2/Visualizations/venn_ms_groups.png", plot = venn_pd_test)
 
 
 
