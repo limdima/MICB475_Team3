@@ -27,10 +27,16 @@ control_ASVs <- core_members(control_stat, detection=0.0001, prevalence = 0.25)
 # Find ASVs present in 33% of samples (prevalence = 0.25), to account for outliers/ASVs unique to only 1 person
 
 ### Make a Venn-diagram
-venn_pd <- ggVennDiagram(x=list(RRMS = RRMS_ASVs, SPMS = SPMS_ASVs, PPMS = PPMS_ASVs, Control = control_ASVs)) +
+
+
+
+venn_pd <- ggVennDiagram(x=list(RRMS = RRMS_ASVs, SPMS = SPMS_ASVs, PPMS = PPMS_ASVs, Control = control_ASVs),
+                         label = "count") +
+  scale_fill_gradient(low = "white", high = "red") +
   scale_x_continuous(expand = expansion(mult = .2)) # this line helps fit the labels into the plot border
 
 venn_pd
+# Can't really find a good way to 'scale' the legend and emphesize non-zeroes better other than setting 0 as colourless (white)
 
 ### save venn diagram
 ggsave("Experimental Aim 2/Visualizations/venn_ms_groups.png", plot = venn_pd)
