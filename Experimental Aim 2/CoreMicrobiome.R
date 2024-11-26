@@ -43,8 +43,6 @@ RS <- "#708242"
 SP <- "#488795"
 
 
-
-venn_pd
 venn_pd_test <- venn_pd + scale_fill_manual(values = c('PPMS/Control' = zero, 
                                        'PPMS'= zero, 
                                        'SPMS' = zero, 
