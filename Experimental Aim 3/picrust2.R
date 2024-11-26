@@ -59,7 +59,7 @@ metadata_PPMS_vs_RRMS <- filter(metadata, disease_course == "PPMS" | disease_cou
 
 
 #Filtering the abundance table to only include samples that are in the filtered metadata
-sample_names = metadata_SPMS_vs_control$'sample-id'
+sample_names = metadata_RRMS_vs_control$'sample-id'
 sample_names = append(sample_names, "pathways")
 abundance_data_filtered = abundance_data[,colnames(abundance_data) %in% sample_names] #This step is the actual filtering
 # 512 samples in abundance data filtered for SPMS and control
@@ -150,3 +150,16 @@ ggplot(data = sig_res, aes(y = reorder(description, sort(as.numeric(log2FoldChan
   geom_bar(stat = "identity")+ 
   theme_bw()+
   labs(x = "Log2FoldChange", y="Pathways")
+
+# Testing:
+
+z_scores <- heatmap_SPMS_control $ data
+
+z_score_df <- z_scores %>%
+  group_by(rowname, disease_course) %>%
+  summarise(mean_z_score = mean(Value, na.rm = TRUE))
+
+z_score_df_2 <- z_score_df %>%
+  spread(key = disease_course, value = mean_z_score) %>%
+  mutate(difference = RRMS - Control) %>%
+  select(rowname, difference)
