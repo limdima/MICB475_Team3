@@ -27,10 +27,36 @@ control_ASVs <- core_members(control_stat, detection=0.0001, prevalence = 0.25)
 # Find ASVs present in 33% of samples (prevalence = 0.25), to account for outliers/ASVs unique to only 1 person
 
 ### Make a Venn-diagram
-venn_pd <- ggVennDiagram(x=list(RRMS = RRMS_ASVs, SPMS = SPMS_ASVs, PPMS = PPMS_ASVs, Control = control_ASVs)) +
+venn_pd <- ggVennDiagram(x=list(RRMS = RRMS_ASVs, SPMS = SPMS_ASVs, PPMS = PPMS_ASVs, Control = control_ASVs),
+                         label_size = 3.5,
+                         label_alpha = 0) +
   scale_x_continuous(expand = expansion(mult = .2)) # this line helps fit the labels into the plot border
 
+# Manually change colors here:
+venn_pd$layers[[1]]$mapping <- aes(fill = name)
+
+zero <- "white"
+P <- "#7570b3"
+R <- "#d95f02"
+S <- "#1b9e77"
+RS <- "#708242"
+SP <- "#488795"
+
+
+
 venn_pd
+venn_pd_test <- venn_pd + scale_fill_manual(values = c('PPMS/Control' = zero, 
+                                       'PPMS'= zero, 
+                                       'SPMS' = zero, 
+                                       'SPMS/Control' = zero,
+                                       'RRMS/PPMS' = zero,
+                                       'RRMS/SPMS' = zero,
+                                       'RRMS/SPMS/Control' = zero,
+                                       'RRMS/PPMS/Control' = zero,
+                                       'RRMS' = R,
+                                       'SPMS/PPMS' = SP))
+venn_pd_test
+
 
 ### save venn diagram
 ggsave("Experimental Aim 2/Visualizations/venn_ms_groups.png", plot = venn_pd)
