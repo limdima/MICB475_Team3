@@ -187,49 +187,111 @@ summary_C <- merge_C_tidy %>%
 ### Plots for the summary tables
 
 # ASVs in RRMS only
-plot_unique_RRMS <- ggplot(summary_RRMS, aes(x = reorder(GenusSpecies, MeanAbundancePct), y= MeanAbundancePct)) +
-  geom_bar(stat = "identity") +
-  coord_flip() + 
-  labs(title = "Mean Relative abundance per ASV unique to RRMS",
+plot_unique_RRMS <- ggplot(summary_RRMS, 
+                           aes(x = reorder(GenusSpecies, MeanAbundancePct), 
+                               y = MeanAbundancePct)) +
+  geom_segment(aes(xend = GenusSpecies, y = 0, yend = MeanAbundancePct), 
+               color = "#d95f02", linewidth = 1.5) +  # Increase line thickness
+  geom_point(color = "#d95f02", size = 5) +      # Increase point size
+  coord_flip() +
+  labs(title = " ",
        x = "Species",
-       y = "Average relative abundance (%)") +
-  theme_classic()
+       y = "Average Relative Abundance (%)") +
+  
+  scale_x_discrete(labels = c("g__Bacteroides_s__Bacteroides_eggerthii" = expression(italic("Bacteroides eggerthii")),
+                              "g__UCG-002_NA" = expression(italic("Ihubacter massiliensis")),
+                              "g__[Eubacterium]_hallii_group_NA" = expression(italic("Aminipila terrae")),
+                              "g__Incertae_Sedis_s__[Clostridium]_leptum" = expression(italic("Anaerotignum amnivorans")),
+                              "g__Family_XIII_UCG-001_s__uncultured_bacterium" = expression(italic("Vescimonas coprocola")),
+                              "g__Family_XIII_AD3011_group_s__uncultured_organism" = expression(italic("Clostridium leptum")),
+                              "NA_NA" = expression(italic("Anaerobutyricum soehngenii")))) +
+  
+  theme_classic() +
+  scale_y_continuous(expand = c(0, 0))
 
-ggsave("Experimental Aim 2/Visualizations/RRMS_Unique_Species.png", plot = plot_unique_RRMS)
+#ggsave("Experimental Aim 2/Visualizations/RRMS_Unique_Species.png", plot = plot_unique_RRMS)
 
 
 # ASVs in all MS groups 
 plot_unique_MS <- ggplot(summary_MS, aes(x = reorder(GenusSpecies, MeanAbundancePct), y= MeanAbundancePct)) +
-  geom_bar(stat = "identity") +
-  coord_flip() + 
-  labs(title = "Mean Relative abundance per ASV unique to MS groups",
+  geom_segment(aes(xend = GenusSpecies, y = 0, yend = MeanAbundancePct), 
+               color = "#e7298a", linewidth = 1.5) +  # Increase line thickness
+  geom_point(color = "#e7298a", size = 5) +      # Increase point size
+  coord_flip() +
+  labs(title = " ",
        x = "Species",
-       y = "Average relative abundance (%)")+
-  theme_classic()
+       y = "Average Relative Abundance (%)") +
+  
+  scale_x_discrete(labels = c("g__Eisenbergiella_s__uncultured_organism" = expression(italic("Clostridium innocuum")),
+                              "g__Lachnoclostridium_NA" = expression(italic("Vescimonas fastidiosa")),
+                              "g__UCG-005_s__gut_metagenome" = expression(italic("Vescimonas coprocola")),
+                              "NA_NA" = expression(italic("Eisenbergiella tayi")),
+                              "g__[Clostridium]_innocuum_group_NA" = expression(italic("Enterocloster clostridioformis")))) +
+  
+  theme_classic() +
+  scale_y_continuous(expand = c(0, 0))
 
-ggsave("Experimental Aim 2/Visualizations/MS_Unique_Species.png", plot = plot_unique_MS)
+#ggsave("Experimental Aim 2/Visualizations/MS_Unique_Species.png", plot = plot_unique_MS)
 
 # ASVs in progressive MS only
 plot_unique_PMS <- ggplot(summary_PMS, aes(x = reorder(GenusSpecies, MeanAbundancePct), y= MeanAbundancePct)) +
-  geom_bar(stat = "identity") +
-  coord_flip() + 
-  labs(title = "Mean Relative abundance per ASV unique to Progressive MS",
+  geom_segment(aes(xend = GenusSpecies, y = 0, yend = MeanAbundancePct), 
+               color = "#e6ab02", linewidth = 1.5) +  # Increase line thickness
+  geom_point(color = "#e6ab02", size = 5) +      # Increase point size
+  coord_flip() +
+  labs(title = " ",
        x = "Species",
-       y = "Average relative abundance (%)")+
-  theme_classic()
+       y = "Average Relative Abundance (%)")+
+  
+  scale_x_discrete(labels = c("g__Tyzzerella_NA" = expression(italic("Coprobacter fastidiosus")),
+                              "g__Holdemanella_s__uncultured_bacterium" = expression(italic("Porphyromonas asaccharolytica")),
+                              "g__Anaerococcus_s__Anaerococcus_vaginalis" = expression(italic("Porphyromonas endodontalis")),
+                              "g__Peptoniphilus_NA" = expression(italic("Alistipes indistinctus")),
+                              "g__Varibaculum_NA" = expression(italic("Varibaculum massiliense")),
+                              "g__Blautia_NA" = expression(italic("Holdemanella porci")),
+                              "g__Ezakiella_NA" = expression(italic("Faecalicoccus acidiformans")),
+                              "g__Porphyromonas_NA" = expression(italic("Anaerococcus vaginalis")),
+                              "g__S5-A14a_s__uncultured_Anaerovorax" = expression(italic("Ezakiella coagulans")),
+                              "NA_NA" = expression(italic("Aedoeadaptatus urinae")),
+                              "g__Peptoniphilus_s__Peptoniphilus_lacrimalis" = expression(italic("Peptoniphilus lacrimalis")),
+                              "g__Porphyromonas_s__Porphyromonas_asaccharolytica" = expression(italic("Peptoniphilus lacydonensis")),
+                              "g__Christensenellaceae_R-7_group_NA" = expression(italic("Peptoniphilus faecalis")),
+                              "g__Tyzzerella_s__unidentified" = expression(italic("Casaltella massiliensis")),
+                              "g__Colidextribacter_NA" = expression(italic("Clostridium colinum")),
+                              "g__uncultured_s__Clostridiales_bacterium" = expression(italic("Flavonifactor plautii")),
+                              "g__Coprobacter_s__uncultured_organism" = expression(italic("Acutalibacter muris")),
+                              "g__Alistipes_s__Alistipes_indistinctus" = expression(italic("Aristaeella lactis")),
+                              "g__Incertae_Sedis_s__uncultured_organism" = expression(italic("Coprococcus phoceensis")))) +
+  
+  theme_classic() +
+  scale_y_continuous(expand = c(0, 0))
 
-ggsave("Experimental Aim 2/Visualizations/PMS_Unique_Species.png", plot = plot_unique_PMS)
+#ggsave("Experimental Aim 2/Visualizations/PMS_Unique_Species.png", plot = plot_unique_PMS)
 
 
-# ASVs in control group only
-plot_unique_control <- ggplot(summary_C, aes(x = reorder(GenusSpecies, MeanAbundancePct), y= MeanAbundancePct)) +
-  geom_bar(stat = "identity") +
-  coord_flip() + 
-  labs(title = "Mean Relative abundance per ASV unique to Control",
-       x = "Species",
-       y = "Average relative abundance (%)")+
-  theme_classic()
+# ASVs in control group only (WILL NOT BE INCLUDED)
+#plot_unique_control <- ggplot(summary_C, aes(x = reorder(GenusSpecies, MeanAbundancePct), y= MeanAbundancePct)) +
+#  geom_bar(stat = "identity") +
+#  coord_flip() + 
+#  labs(title = "Mean Relative abundance per ASV unique to Control",
+#       x = "Species",
+#       y = "Average relative abundance (%)")+
+#  theme_classic()
 
 
-ggsave("Experimental Aim 2/Visualizations/Control_Unique_Species.png", plot = plot_unique_control)
+#ggsave("Experimental Aim 2/Visualizations/Control_Unique_Species.png", plot = plot_unique_control)
+
+
+# Combining plots
+abundance_combined_plot <- ggdraw(
+  plot_grid(
+    plot_unique_RRMS, 
+    plot_unique_MS, 
+    plot_unique_PMS, 
+    labels = c("A", "B", "C"), 
+    ncol = 2
+  )
+)
+
+ggsave("abund_unique_asv_updated.png", plot = abundance_combined_plot, width = 15, height = 8)
 
