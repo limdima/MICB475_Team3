@@ -36,11 +36,10 @@ venn_pd <- ggVennDiagram(x=list(RRMS = RRMS_ASVs, SPMS = SPMS_ASVs, PPMS = PPMS_
 venn_pd$layers[[1]]$mapping <- aes(fill = name)
 
 zero <- "white"
-P <- "#7570b3"
-R <- "#d95f02"
-S <- "#1b9e77"
-RS <- "#708242"
-SP <- "#488795"
+oneten <- "#7ce8ff"
+eleventwenty <- "#55d0ff"
+twentythirty <- "#00acdf"
+thirtyplus <- "#0080bf"
 
 
 venn_pd_test <- venn_pd + scale_fill_manual(values = c('PPMS/Control' = zero, 
@@ -51,8 +50,14 @@ venn_pd_test <- venn_pd + scale_fill_manual(values = c('PPMS/Control' = zero,
                                        'RRMS/SPMS' = zero,
                                        'RRMS/SPMS/Control' = zero,
                                        'RRMS/PPMS/Control' = zero,
-                                       'RRMS' = R,
-                                       'SPMS/PPMS' = SP))
+                                       'RRMS' = oneten,
+                                       'RRMS/SPMS/PPMS' = oneten,
+                                       'SPMS/PPMS/Control' = oneten,
+                                       'Control' = eleventwenty,
+                                       'SPMS/PPMS' = twentythirty,
+                                       'RRMS/Control' = twentythirty,
+                                       'RRMS/SPMS/PPMS/Control' = thirtyplus)) +
+  theme(legend.position = "none")
 venn_pd_test
 
 
