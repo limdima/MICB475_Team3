@@ -227,7 +227,7 @@ significant_features_with_desc <- significant_features_with_desc %>%
     slice_head(n = 1) %>%   # this removes the duplicate rows by selecting the first row in each "grouped" feature+group
     ungroup()
 
-
+write.table(significant_features_with_desc, "Experimental Aim 3/Visualizations/Significant Features pvalue Table.txt")
 
 ### Code for the heatmap or PCA won't really work as they only take 2 variables at a time
 # Even when combining individual pathway_daa() runs, heat map and PCA doesn't work with 
