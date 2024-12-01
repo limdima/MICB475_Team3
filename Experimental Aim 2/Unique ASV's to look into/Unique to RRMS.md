@@ -26,6 +26,11 @@ Clostridium leptum (100) --> "89a195406eb6143d74832533a777e891"
   - Butyrate production
   - Maintain the epithelial barrier and regulate the immune response
 
+  - some literature:
+  - 51.Kabeerdoss J, Sankaran V, Pugazhendhi S, Ramakrishna BS. Clostridium leptum group bacteria abundance and diversity in the fecal microbiota of patients with inflammatory bowel disease: a case–control study in India. BMC Gastroenterology. 2013;13(1):20. [DOI] [PMC free article] [PubMed] [Google Scholar]
+  - 52.Takaishi H, Matsuki T, Nakazawa A, et al. Imbalance in intestinal microflora constitution could be involved in the pathogenesis of inflammatory bowel disease. International Journal of Medical Microbiology. 2008;298(5–6):463–472. [DOI] [PubMed] [Google Scholar]
+  - 53.Prosberg M, Bendtsen F, Vind I, Petersen AM, Gluud LL. The association between the gut microbiota and the inflammatory bowel disease activity: a systematic review and meta-analysis. Scandinavian Journal of Gastroenterology. 2016;51(12):1407–1415. [DOI] [PubMed] [Google Scholar]
+
 Anaerobutyricum soehngenii (99.34) --> "01ae42ba9c06bdfde13977a769342a97"
 
 - also has immune modulating properties, involved in butyrate (SCFA) production.
