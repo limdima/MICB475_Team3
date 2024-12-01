@@ -55,6 +55,8 @@ Aristaeella lactis (93.92) --> "fa40a49dc9c8771ebb27a4ed45a52c3f"
 
 Coprococcus phoceensis (100) --> "04e776b2dcbfa3b930453bf71dbfae6c"
 
+- Usually decreased in MS individuals
+- butyrate-producing bacteria
 
 Blautia stercoris (100) --> "83b0d8c3e6a9e5f7a22b19d6b797f21e"
   - SCFA production and anti-inflammatory effects
