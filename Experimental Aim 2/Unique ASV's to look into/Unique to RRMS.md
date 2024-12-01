@@ -28,5 +28,7 @@ Clostridium leptum (100) --> "89a195406eb6143d74832533a777e891"
 
 Anaerobutyricum soehngenii (99.34) --> "01ae42ba9c06bdfde13977a769342a97"
 
-- also has immune modulating properties, involved in butyrate (SCFA) production. 
+- also has immune modulating properties, involved in butyrate (SCFA) production.
+- previously none as Eubacterium hallii
+    - Duncan, S. H., Louis, P., & Flint, H. J. (2004). Lactate-utilizing bacteria, isolated from human feces, that produce butyrate as a major fermentation product. Applied and environmental microbiology, 70(10), 5810–5817. https://doi.org/10.1128/AEM.70.10.5810-5817.2004
 
