@@ -3,6 +3,13 @@
 Bacteroides eggerthii (100) --> "5cc8602f11bd55a73d752cd25486851c"
   - involved in SCFA production and gut homeostasis
 
+- Bacteroides eggerthii has been shown to weakly stimulate TLR4 (a patterun recognition receptor) that is usually on immune cells and can detect LPS in gram negative bacteria (triggering imflammation). It also causes less expression of certain markers (CD40, CD80 and CD86) on dendritic cells - which are important for activating t-cells (also minimizes immune responses). Thus it has immune-modulating properties.
+    - *cite: Tiemblo Martín, M., Coccimiglio, M., Andretta, E., De Simone Carone, L., Bell, A., Gerpe-Amor, T., Di Carluccio, C., Molinaro, A., van Kooyk, Y., Juge, N., Chiodo, F., Di Lorenzo, F., & Silipo, A. (2025). The human gut Bacteroides eggerthii expresses a new galactofuranose-containing lipooligosaccharide with weak immunostimulatory properties. Carbohydrate polymers, 348(Pt A), 122833. https://doi.org/10.1016/j.carbpol.2024.122833*
+ 
+- Bacteroides generally adaptive well to changes in the GI tract
+
+
+
 Ihubacter massiliensis (90.13) --> "cb496efaf130bb30fdf9d58d6cc54d85"
   - production of SCFA (acetate, butyrate, and propionate)
 
@@ -21,5 +28,5 @@ Clostridium leptum (100) --> "89a195406eb6143d74832533a777e891"
 
 Anaerobutyricum soehngenii (99.34) --> "01ae42ba9c06bdfde13977a769342a97"
 
-
+- also has immune modulating properties, involved in butyrate (SCFA) production. 
 
