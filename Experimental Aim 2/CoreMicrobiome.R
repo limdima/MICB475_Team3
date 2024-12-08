@@ -251,3 +251,125 @@ plot_unique_control <- ggplot(summary_C, aes(x = reorder(GenusSpecies, MeanAbund
 
 ggsave("Experimental Aim 2/Visualizations/Control_Unique_Species.png", plot = plot_unique_control)
 
+
+
+
+## Re-labelling plots and making into lollipop: ###
+
+### RRMS LOLLIPOP ###
+                                        
+plot_unique_RRMS <- ggplot(summary_RRMS, aes(x = reorder(GenusSpecies, MeanAbundancePct), y = MeanAbundancePct)) +
+  geom_segment(aes(xend = GenusSpecies, y = 0, yend = MeanAbundancePct), 
+               color = "#d95f02", linewidth = 1.5) +  # Increase line thickness
+  geom_point(color = "#d95f02", size = 5) + 
+  scale_y_continuous(expand = c(0, 0)) +
+  coord_flip() + 
+  labs(title = " ",
+       x = "Species unique to RRMS",
+       y = "Average relative abundance (%)") +
+  scale_x_discrete(labels = c("g__Incertae_Sedis_s__[Clostridium]_leptum" = expression(italic("                     Clostridium leptum")),
+                              "g__Family_XIII_AD3011_group_s__uncultured_organism" = "                     Unidentified",
+                              "NA_NA" = "                     Unidentified"
+  )) +
+  theme_classic() +
+  theme(
+    # Change background color to lighter purple
+    axis.text.y = element_text(size = 12), 
+    axis.text.x = element_text(size = 10),  
+    axis.title.x = element_text(size = 14),  # Adjust x-axis title font size
+    axis.title.y = element_text(size = 14),  # Adjust y-axis title font size
+    panel.background = element_rect(fill = "#ffebcc", color = "transparent"),
+  )
+
+### SPMS LOLLIPOP ###
+                                        
+plot_unique_SPMS <- ggplot(summary_SPMS, aes(x = reorder(GenusSpecies, MeanAbundancePct), y= MeanAbundancePct)) +
+  geom_segment(aes(xend = GenusSpecies, y = 0, yend = MeanAbundancePct), 
+               color = "#1b9e77", linewidth = 1.5) +  # Increase line thickness
+  geom_point(color = "#1b9e77", size = 5) + 
+  coord_flip() + 
+  labs(title = " ",
+       x = "Species unique to SPMS",
+       y = "Average relative abundance (%)")+
+  
+  scale_x_discrete(labels = c("g__Tyzzerella_NA" = expression(italic("Coprococcus phoceensis")),
+                              "g__Holdemanella_s__uncultured_bacterium" = expression(italic("Holdemanella porci")),
+                              "g__Peptoniphilus_NA" = expression(italic("Peptoniphilus senegalensis")),
+                              
+                              "g__Blautia_NA" = expression(italic("Blautia stercoris")),
+                              "g__Ezakiella_NA" = expression(italic("Ezakiella coagulans")),
+                              "g__Porphyromonas_NA" = "Unidentified",
+                              "g__S5-A14a_s__uncultured_Anaerovorax" = expression(italic("Casaltella massiliensis")),
+                              "NA_NA" = expression(italic("Clostridium hylemonae")),
+                              "g__Peptoniphilus_s__Peptoniphilus_lacrimalis" = expression(italic("Peptoniphilus lacrimalis")),
+                              "g__Porphyromonas_s__Porphyromonas_asaccharolytica" = expression(italic("Porphyromonas asaccharolytica")),
+                              
+                              "g__Tyzzerella_s__unidentified" = "Unidentified",
+                              "g__Colidextribacter_NA" = expression(italic("Flavonifractor plautii")),
+                              
+                              "g__Incertae_Sedis_s__uncultured_organism" = expression(italic("Acutalibacter muris"))
+  )) +
+  theme_classic() +
+  theme(
+    # Change background color to lighter purple
+    panel.background = element_rect(fill = "#ebfaeb", color = "transparent"),
+    axis.text.y = element_text(size = 12), 
+    axis.text.x = element_text(size = 10),  
+    axis.title.x = element_text(size = 14),  # Adjust x-axis title font size
+    axis.title.y = element_text(size = 14),
+  ) +
+  scale_y_continuous(expand = c(0, 0))
+                                       
+### PPMS LOLLIPOP ###
+                                        
+plot_unique_PPMS <- ggplot(summary_PPMS, aes(x = reorder(GenusSpecies, MeanAbundancePct), y = MeanAbundancePct)) +
+  geom_segment(aes(xend = GenusSpecies, y = 0, yend = MeanAbundancePct), 
+               color = "#7570b3", linewidth = 1.5) +  # Increase line thickness
+  geom_point(color = "#7570b3", size = 5) + 
+  coord_flip() + 
+  labs(title = " ",
+       x = "Species unique to PPMS",
+       y = "Average relative abundance (%)") +
+  scale_x_discrete(labels = c("f__Prevotellaceae_g__Prevotella_NA" = expression(italic("Segatella copri")),
+                              "f__Ruminococcaceae_g__CAG-352_s__uncultured_bacterium" = expression(italic("Ruminococcoides bili")),
+                              "f__Bacteroidaceae_g__Bacteroides_s__Bacteroides_plebeius" = "Unidentified ",
+                              "f__Enterobacteriaceae_NA_NA" = expression(italic("Alistipes indistinctus")),
+                              "f__Peptostreptococcaceae_g__Terrisporobacter_s__uncultured_bacterium" = expression(italic("Terrisporobacter mayombei")),
+                              "f__Lachnospiraceae_g__[Ruminococcus]_torques_group_NA" = expression(italic("Ruminococcus faecis")),
+                              "f__Lachnospiraceae_g__Blautia_s__Ruminococcus_sp." = "Unidentified",
+                              "f__Izemoplasmatales_g__Izemoplasmatales_s__uncultured_organism" = expression(italic("Blautia faecis")),
+                              "f__Christensenellaceae_g__Christensenellaceae_R-7_group_NA" = "Unidentified",
+                              "f__Oscillospiraceae_NA_NA" = expression(italic("Intestinimonas butyriciproducens")),
+                              "f__Lachnospiraceae_g__Frisingicoccus_NA" = expression(italic("Frisingicoccus caecimuris")),
+                              "f__Oscillospiraceae_g__Colidextribacter_s__uncultured_Clostridia" = expression(italic("Colidextribacter massiliensis")),
+                              "f__UCG-010_g__UCG-010_s__metagenome" = "Unidentified",
+                              "f__Eggerthellaceae_g__Adlercreutzia_NA" = "Unidentified",
+                              "f__Ruminococcaceae_g__Negativibacillus_s__uncultured_bacterium" = "Unidentified",
+                              "f__UCG-010_g__UCG-010_s__gut_metagenome" = expression(italic("Adlercreutzia equolifaciens")),
+                              "f__UCG-010_g__UCG-010_s__uncultured_bacterium" = expression(italic("Negativibacillus massiliensis"))
+  )) +
+  theme_classic() +
+  theme(
+    # Change background color to lighter purple
+    panel.background = element_rect(fill = "#E6E6FA", color = "transparent"),
+    axis.text.y = element_text(size = 12), 
+    axis.text.x = element_text(size = 10),  
+    axis.title.x = element_text(size = 14),  # Adjust x-axis title font size
+    axis.title.y = element_text(size = 14),
+  ) +
+  scale_y_continuous(expand = c(0, 0))
+
+
+### Create combined plot ###
+                                        
+abundance_combined_plot <- ggdraw(
+  plot_grid( 
+    plot_unique_SPMS, 
+    plot_unique_PPMS, 
+    plot_unique_RRMS,
+    labels = c("A", "B", "C"), 
+    ncol = 2
+  )
+)
+
+ggsave("Experimental Aim 2/Visualizations/abund_unique_spms_ppms_rrms", plot = abundance_combined_plot, width = 15, height = 8)
