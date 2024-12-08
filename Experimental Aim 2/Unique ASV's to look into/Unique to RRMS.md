@@ -1,39 +1,11 @@
-##  Genus species (% identity)  --> ASV code
+##  ASV code --> Genus species (% identity) (listed in the order of decreasing relative abundance)
 
-Bacteroides eggerthii (100) --> "5cc8602f11bd55a73d752cd25486851c"
-  - involved in SCFA production and gut homeostasis
+89a195406eb6143d74832533a777e891 --> Clostridium leptum strain DSM 753 (100 %)
 
-- Bacteroides eggerthii has been shown to weakly stimulate TLR4 (a patterun recognition receptor) that is usually on immune cells and can detect LPS in gram negative bacteria (triggering imflammation). It also causes less expression of certain markers (CD40, CD80 and CD86) on dendritic cells - which are important for activating t-cells (also minimizes immune responses). Thus it has immune-modulating properties.
-    - *cite: Tiemblo Martín, M., Coccimiglio, M., Andretta, E., De Simone Carone, L., Bell, A., Gerpe-Amor, T., Di Carluccio, C., Molinaro, A., van Kooyk, Y., Juge, N., Chiodo, F., Di Lorenzo, F., & Silipo, A. (2025). The human gut Bacteroides eggerthii expresses a new galactofuranose-containing lipooligosaccharide with weak immunostimulatory properties. Carbohydrate polymers, 348(Pt A), 122833. https://doi.org/10.1016/j.carbpol.2024.122833*
- 
-- Bacteroides generally adaptive well to changes in the GI tract
+cb496efaf130bb30fdf9d58d6cc54d85 --> Ihubacter massiliensis strain Marseille-P2843 (90.13 %)
+
+66189c6832d37c2c7371d0e6e14d7415 --> Anaerotignum aminivorans strain SH021 (94.70%)
 
 
 
-Ihubacter massiliensis (90.13) --> "cb496efaf130bb30fdf9d58d6cc54d85"
-  - production of SCFA (acetate, butyrate, and propionate)
-
-Aminipila terrae (92.76) --> "8a303db3d6b466981499de25a5ec66d4"
-  - amino acid breakdown and protein fermentation
-
-Anaerotignum amnivorans (94.70) --> "66189c6832d37c2c7371d0e6e14d7415"
-
-
-Vescimonas coprocola (98.01) --> "b62503d6c04d1172e2e4e9781657105f"
-
-
-Clostridium leptum (100) --> "89a195406eb6143d74832533a777e891"
-  - Butyrate production
-  - Maintain the epithelial barrier and regulate the immune response
-
-  - some literature:
-  - 51.Kabeerdoss J, Sankaran V, Pugazhendhi S, Ramakrishna BS. Clostridium leptum group bacteria abundance and diversity in the fecal microbiota of patients with inflammatory bowel disease: a case–control study in India. BMC Gastroenterology. 2013;13(1):20. [DOI] [PMC free article] [PubMed] [Google Scholar]
-  - 52.Takaishi H, Matsuki T, Nakazawa A, et al. Imbalance in intestinal microflora constitution could be involved in the pathogenesis of inflammatory bowel disease. International Journal of Medical Microbiology. 2008;298(5–6):463–472. [DOI] [PubMed] [Google Scholar]
-  - 53.Prosberg M, Bendtsen F, Vind I, Petersen AM, Gluud LL. The association between the gut microbiota and the inflammatory bowel disease activity: a systematic review and meta-analysis. Scandinavian Journal of Gastroenterology. 2016;51(12):1407–1415. [DOI] [PubMed] [Google Scholar]
-
-Anaerobutyricum soehngenii (99.34) --> "01ae42ba9c06bdfde13977a769342a97"
-
-- also has immune modulating properties, involved in butyrate (SCFA) production.
-- previously none as Eubacterium hallii
-    - Duncan, S. H., Louis, P., & Flint, H. J. (2004). Lactate-utilizing bacteria, isolated from human feces, that produce butyrate as a major fermentation product. Applied and environmental microbiology, 70(10), 5810–5817. https://doi.org/10.1128/AEM.70.10.5810-5817.2004
 
