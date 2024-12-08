@@ -36,27 +36,27 @@ venn_pd <- ggVennDiagram(x=list(RRMS = RRMS_ASVs, SPMS = SPMS_ASVs, PPMS = PPMS_
 venn_pd$layers[[1]]$mapping <- aes(fill = name)
 
 zero <- "white"
-oneten <- "#7ce8ff"
-eleventwenty <- "#55d0ff"
-twentythirty <- "#00acdf"
-thirtyplus <- "#0080bf"
-sharedcontrol <- "#005088"
+onefive <- "#7ce8ff"
+sixten <- "#55d0ff"
+eleventwenty <- "#0091bc"
+thirtyplus <- "#00609a"
+sharedcontrol <- "#b8b8b8"
 
-venn_pd_test <- venn_pd + scale_fill_manual(values = c('PPMS/Control' = oneten, 
+venn_pd_test <- venn_pd + scale_fill_manual(values = c('PPMS/Control' = sharedcontrol, 
                                        'PPMS'= eleventwenty, 
                                        'SPMS' = eleventwenty, 
                                        'SPMS/Control' = sharedcontrol,
-                                       'RRMS/PPMS' = zero,
-                                       'RRMS/SPMS' = zero,
+                                       'RRMS/PPMS' = onefive,
+                                       'RRMS/SPMS' = onefive,
                                        'RRMS/SPMS/Control' = sharedcontrol,
-                                       'RRMS/PPMS/Control' = sharedcontrol,
+                                       'RRMS/PPMS/Control' = "#858d90",
                                        'RRMS' = oneten,
                                        'RRMS/SPMS/PPMS' = oneten,
                                        'SPMS/PPMS/Control' = sharedcontrol,
                                        'Control' = sharedcontrol,
-                                       'SPMS/PPMS' = twentythirty,
-                                       'RRMS/Control' = twentythirty,
-                                       'RRMS/SPMS/PPMS/Control' = thirtyplus)) +
+                                       'SPMS/PPMS' = sixten,
+                                       'RRMS/Control' = "#858d90",
+                                       'RRMS/SPMS/PPMS/Control' = "#4c4c4c")) +
   theme(legend.position = "none")
 venn_pd_test
 
