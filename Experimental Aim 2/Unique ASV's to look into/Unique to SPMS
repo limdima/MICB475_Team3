@@ -1,15 +1,15 @@
-##  ASV code --> Genus species (% identity) (listed in the order of decreasing relative abundance)
+##  ASV code --> Genus species strain (% identity) (listed in the order of decreasing relative abundance)
 
-04e776b2dcbfa3b930453bf71dbfae6c --> Coprococcus phoceensis strain Marseille-P3062 (100)
-babe546a127e4bbe62e70c16fdffa445 --> 
-4ed327cbd63f7814eed36b4ec6894867 --> 
-83b0d8c3e6a9e5f7a22b19d6b797f21e --> 
-452bb8f858c11e9e5276b10d432ac72f --> 
-30c4e6e8ec391ad07eb6a1165cf46311 --> 
-877315d59492cf0350b46ad56e5eccb3 --> 
-b9d3c433656bdadd1f7bf7f4c8c3b76a --> 
-58b1c0badb3c55cb6154db46b4571700 --> 
-899577a10741d336f48d2be23f9b0be7 --> 
-8a8d6de89853b245e4bc453245789527 --> 
-16d12481fde3cfa6a4db366d25411122 --> 
-38dfe16cdb1f84df51592a76393f2540 --> 
+04e776b2dcbfa3b930453bf71dbfae6c --> Coprococcus phoceensis (100)
+babe546a127e4bbe62e70c16fdffa445 --> Holdemanella porci strain (100)
+4ed327cbd63f7814eed36b4ec6894867 --> Peptoniphilus senegalensis (100)
+83b0d8c3e6a9e5f7a22b19d6b797f21e --> Blautia stercoris (100)
+452bb8f858c11e9e5276b10d432ac72f --> Ezakiella coagulans/massiliensis/peruensis (100)
+30c4e6e8ec391ad07eb6a1165cf46311 --> Porphyromonas endodontalis (90.26)
+877315d59492cf0350b46ad56e5eccb3 --> Casaltella massiliensis (100)
+b9d3c433656bdadd1f7bf7f4c8c3b76a --> Clostridium hylemonae (98.01)
+58b1c0badb3c55cb6154db46b4571700 --> Peptoniphilus lacrimalis (100)
+899577a10741d336f48d2be23f9b0be7 --> Porphyromonas asaccharolytica (100)
+8a8d6de89853b245e4bc453245789527 --> Clostridium colinum (92.76)
+16d12481fde3cfa6a4db366d25411122 --> Flavonifractor plautii strain (95.92)
+38dfe16cdb1f84df51592a76393f2540 --> Acutalibacter muris (95.36)
