@@ -40,20 +40,20 @@ oneten <- "#7ce8ff"
 eleventwenty <- "#55d0ff"
 twentythirty <- "#00acdf"
 thirtyplus <- "#0080bf"
-
+sharedcontrol <- "#005088"
 
 venn_pd_test <- venn_pd + scale_fill_manual(values = c('PPMS/Control' = oneten, 
                                        'PPMS'= eleventwenty, 
                                        'SPMS' = eleventwenty, 
-                                       'SPMS/Control' = zero,
+                                       'SPMS/Control' = sharedcontrol,
                                        'RRMS/PPMS' = zero,
                                        'RRMS/SPMS' = zero,
-                                       'RRMS/SPMS/Control' = zero,
-                                       'RRMS/PPMS/Control' = zero,
+                                       'RRMS/SPMS/Control' = sharedcontrol,
+                                       'RRMS/PPMS/Control' = sharedcontrol,
                                        'RRMS' = oneten,
                                        'RRMS/SPMS/PPMS' = oneten,
-                                       'SPMS/PPMS/Control' = oneten,
-                                       'Control' = eleventwenty,
+                                       'SPMS/PPMS/Control' = sharedcontrol,
+                                       'Control' = sharedcontrol,
                                        'SPMS/PPMS' = twentythirty,
                                        'RRMS/Control' = twentythirty,
                                        'RRMS/SPMS/PPMS/Control' = thirtyplus)) +
@@ -199,7 +199,7 @@ ggsave("Experimental Aim 2/Visualizations/RRMS_Unique_Species.png", plot = plot_
 plot_unique_SPMS <- ggplot(summary_SPMS, aes(x = reorder(GenusSpecies, MeanAbundancePct), y= MeanAbundancePct)) +
   geom_bar(stat = "identity") +
   coord_flip() + 
-  labs(title = "Mean Relative abundance per ASV unique to RRMS",
+  labs(title = "Mean Relative abundance per ASV unique to SPMS",
        x = "Species",
        y = "Average relative abundance (%)") +
   theme_classic()
@@ -209,7 +209,7 @@ ggsave("Experimental Aim 2/Visualizations/SPMS_Unique_Species.png", plot = plot_
 plot_unique_PPMS <- ggplot(summary_PPMS, aes(x = reorder(GenusSpecies, MeanAbundancePct), y= MeanAbundancePct)) +
   geom_bar(stat = "identity") +
   coord_flip() + 
-  labs(title = "Mean Relative abundance per ASV unique to RRMS",
+  labs(title = "Mean Relative abundance per ASV unique to PPMS",
        x = "Species",
        y = "Average relative abundance (%)") +
   theme_classic()
