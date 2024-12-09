@@ -163,6 +163,23 @@ summary_MS <- merge_MS_tidy %>%
   summarize(MeanAbundancePct = mean(RelAbundance, na.rm = TRUE)*100)   # Convert the relative abundance values to percentage
 # Summarizes the 5 ASVs (Genus') and the mean relative abundance values in the MS groups only\
 
+# For in SPMS, PPMS progressive MS
+subset_PMS <- prune_taxa(intersection_SP, phyloseq_rel) # Keeps the 5 ASVs that are unique to RRMS samples
+taxa_PMS <- as.data.frame(tax_table(subset_PMS)) # take taxa names and Abundance values (otu table) into dataframes
+abund_PMS <- as.data.frame(otu_table(subset_PMS))
+
+taxa_PMS$ASV <- rownames(taxa_PMS)   # set the row names to an actual column 
+abund_PMS$ASV <- rownames(abund_PMS)
+
+merge_PMS_df <- merge(taxa_PMS, abund_PMS, by = "ASV")  # merge the dataframes together
+merge_PMS_tidy <- merge_PMS_df %>% gather(key = "SampleID", value = "RelAbundance", 
+                                        - ASV, -Domain, -Phylum, -Class, -Order, -Family, -Genus, -Species) %>%
+  mutate(GenusSpecies = paste(Genus, Species, sep = "_"))
+
+summary_PMS <- merge_PMS_tidy %>%
+  group_by(GenusSpecies) %>%
+  summarize(MeanAbundancePct = mean(RelAbundance, na.rm = TRUE)*100)   # Convert the relative abundance values to percentage
+# Summarizes the 5 ASVs (Genus') and the mean relative abundance values in the MS groups only\
 
 # For control group only
 subset_C <- prune_taxa(only_C, phyloseq_rel) # Keeps the 21 ASVs that are unique to RRMS samples
