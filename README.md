@@ -1,5 +1,5 @@
 # MICB 475: Data Science Research in Microbiology
-##See meeting minutes in the MeetingMinutes folder
+## See meeting minutes in the MeetingMinutes folder
 
 ## **Team 3:** 
 * Natalia Blanco
