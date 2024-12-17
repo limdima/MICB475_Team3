@@ -7,7 +7,7 @@
 * venn diagram, change the colour and set the range 0-60 to increase the visual gradient
 * need to perform alpha beta diversity analysis on the MS types, same plot style as the treated/untreated analysis
 * find a different way to visually represent the aim 3 aim heatmap results? and manually sift out pathways of interest
-  * ^got confused by what Hans and Evelyn and Hans suggested, someone that understood pls update this
+  * ^got confused by what Hans and Evelyn and Hans suggested, someone that understood pls update this (this was to visualize the pathway abundance in a DESeq2-type plot)
   * take average Z scores for control and ms subtype
   * violin plots for top 5 pathways: x axis -> pathways, y-axis -> Z scores
 * treated vs untreated violin plots will be supplemental figures
